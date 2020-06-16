@@ -57,7 +57,7 @@ def handle_message(event):
 def handle_image(event):
     message_id = event.message.id
 
-    src_image_path = "https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg"
+    #src_image_path = "https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg"
     #main_image_path = MAIN_IMAGE_PATH.format(message_id)
     #preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
 
@@ -77,15 +77,15 @@ def handle_image(event):
     line_bot_api.reply_message(event.reply_token, image_message)
 
     # 画像を削除する
-    src_image_path.unlink()
+    #src_image_path.unlink()
 
 
-def save_image(message_id: str, save_path: str) -> None:
-    """保存"""
-    message_content = line_bot_api.get_message_content(message_id)
-    with open(save_path, "wb") as f:
-        for chunk in message_content.iter_content():
-            f.write(chunk)
+#def save_image(message_id: str, save_path: str) -> None:
+    #"""保存"""
+    #message_content = line_bot_api.get_message_content(message_id)
+    #with open(save_path, "wb") as f:
+       # for chunk in message_content.iter_content():
+        #    f.write(chunk)
 
 
 if __name__ == "__main__":
