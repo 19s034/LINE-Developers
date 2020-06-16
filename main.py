@@ -57,7 +57,7 @@ def handle_message(event):
 def handle_image(event):
     message_id = event.message.id
 
-    src_image_path = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
+    src_image_path = "https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg"
     #main_image_path = MAIN_IMAGE_PATH.format(message_id)
     #preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
 
