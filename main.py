@@ -19,7 +19,7 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
+#SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
 #MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
 #PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
 
@@ -57,7 +57,7 @@ def handle_message(event):
 def handle_image(event):
     message_id = event.message.id
 
-    src_image_path = Path(SRC_IMAGE_PATH.format(message_id)).absolute()
+    src_image_path = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
     #main_image_path = MAIN_IMAGE_PATH.format(message_id)
     #preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
 
@@ -68,8 +68,8 @@ def handle_image(event):
 
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/{src_image_path}",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/{preview_image_path}",
+        original_content_url="https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg",
     )
 
     #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
