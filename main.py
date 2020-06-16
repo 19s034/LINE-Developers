@@ -11,7 +11,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
 
 app = Flask(__name__)
 
-FQDN = ""
+
 
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
@@ -20,8 +20,8 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
-MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
-PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
+#MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
+#PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
 
 
 @app.route("/")
@@ -58,19 +58,21 @@ def handle_image(event):
     message_id = event.message.id
 
     src_image_path = Path(SRC_IMAGE_PATH.format(message_id)).absolute()
-    main_image_path = MAIN_IMAGE_PATH.format(message_id)
-    preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
+    #main_image_path = MAIN_IMAGE_PATH.format(message_id)
+    #preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
 
     # 画像を保存
     save_image(message_id, src_image_path)
 
+
+
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/{main_image_path}",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/{preview_image_path}",
+        original_content_url="https://secret-lake-56663.herokuapp.com/static/{src_image_path}",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/{src_image_path}",
     )
 
-    app.logger.info(f"https://date-the-image.herokuapp.com/{main_image_path}")
+    app.logger.info("https://secret-lake-56663.herokuapp.com/static/{src_image_path}")
     line_bot_api.reply_message(event.reply_token, image_message)
 
     # 画像を削除する
