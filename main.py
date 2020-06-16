@@ -2,15 +2,19 @@ import os
 from pathlib import Path
 
 from flask import Flask, abort, request
-
+from linebot import (
+   LineBotApi, WebhookHandler
+)
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
 app = Flask(__name__)
-
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 SRC_IMAGE_PATH = "static/images/{}.jpg"
 MAIN_IMAGE_PATH = "static/images/{}_main.jpg"
@@ -56,10 +60,6 @@ def handle_image(event):
 
     # 画像を保存
     save_image(message_id, src_image_path)
-
-    # 画像の加工、保存
-    date_the_image(src=src_image_path, desc=Path(main_image_path).absolute())
-    date_the_image(src=src_image_path, desc=Path(preview_image_path).absolute())
 
     # 画像の送信
     image_message = ImageSendMessage(
