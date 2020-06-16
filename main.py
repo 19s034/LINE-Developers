@@ -51,7 +51,7 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     message_id = event.message.id
-
+    print(event.massage.id)
     # message_idから画像のバイナリデータを取得
     message_content = line_bot_api.get_message_content(message_id)
 
@@ -63,6 +63,7 @@ def handle_image(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     message_id = event.message.id
+    print(event.massage.id)
     main_image_path = f"static/images/{message_id}_main.jpg"
     preview_image_path = f"static/images/{message_id}_preview.jpg"
 
