@@ -10,15 +10,18 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
 app = Flask(__name__)
+
+FQDN = ""
+
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-SRC_IMAGE_PATH = "static/images/{}.jpg"
-MAIN_IMAGE_PATH = "static/images/{}_main.jpg"
-PREVIEW_IMAGE_PATH = "static/images/{}_preview.jpg"
+SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
+MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
+PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
 
 
 @app.route("/")
