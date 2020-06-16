@@ -65,7 +65,7 @@ def handle_image(event):
     #ave_image(message_id, src_image_path)
     message_content = line_bot_api.get_message_content(message_id)
     with open("static/" + event.message.id + ".jpg", "wb") as f:
-        f.write(message_content.iter_content)
+        f.write(message_content.content)
 
     # 画像の送信
     image_message = ImageSendMessage(
