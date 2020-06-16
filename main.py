@@ -59,10 +59,10 @@ def handle_image(event):
         # バイナリを1024バイトずつ書き込む
         for chunk in message_content.iter_content():
             f.write(chunk)
-            
+
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    ...
+    message_id = event.message.id
     main_image_path = f"static/images/{message_id}_main.jpg"
     preview_image_path = f"static/images/{message_id}_preview.jpg"
 
