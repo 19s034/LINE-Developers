@@ -59,8 +59,12 @@ def handle_image(event):
         # バイナリを1024バイトずつ書き込む
         for chunk in message_content.iter_content():
             f.write(chunk)
-    main_image_path = f"static/images/{message_id}_main.jpg"
-    preview_image_path = f"static/images/{message_id}_preview.jpg"
+
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image(event):
+
+    main_image_path = f"static/images/{event.message.id}_main.jpg"
+    preview_image_path = f"static/images/{event.message.id}_preview.jpg"
 
     # 画像の送信
     image_message = ImageSendMessage(
@@ -69,9 +73,6 @@ def handle_image(event):
     )
 
     line_bot_api.reply_message(event.reply_token, image_message)
-
-
-
 
 if __name__ == "__main__":
    port = int(os.getenv("PORT"))
