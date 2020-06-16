@@ -69,10 +69,10 @@ def handle_image(event):
     # 画像の送信
     image_message = ImageSendMessage(
         original_content_url="https://secret-lake-56663.herokuapp.com/static/{src_image_path}",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/{src_image_path}",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/{preview_image_path}",
     )
 
-    app.logger.info("https://secret-lake-56663.herokuapp.com/static/{src_image_path}")
+    #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
     line_bot_api.reply_message(event.reply_token, image_message)
 
     # 画像を削除する
