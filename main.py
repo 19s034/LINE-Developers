@@ -9,6 +9,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
+from PIL import Image, ImageFilter
+
+
 app = Flask(__name__)
 
 
@@ -57,20 +60,21 @@ def handle_message(event):
 def handle_image(event):
     message_id = event.message.id
 
-    #src_image_path = "https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg"
-    #main_image_path = MAIN_IMAGE_PATH.format(message_id)
-    #preview_image_path = PREVIEW_IMAGE_PATH.format(message_id)
+
 
     # 画像を保存
-    #ave_image(message_id, src_image_path)
+
     message_content = line_bot_api.get_message_content(message_id)
     with open("static/" + message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
+    img = Image.open("static/" + message_id + ".jpg")
+    new_img = img.filter(ImageFilter.GaussianBlur(4))
+
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/" + message_id + ".jpg",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/" + message_id + ".jpg",
+        original_content_url="https://secret-lake-56663.herokuapp.com/"+ new_img,
+        preview_image_url="https://secret-lake-56663.herokuapp.com/"+ new_img,
     )
 
     #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
