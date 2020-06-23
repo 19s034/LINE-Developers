@@ -64,7 +64,7 @@ def handle_image(event):
 
     # 画像を保存
 
-    message_content = linae_bot_api.get_message_content(message_id)
+    message_content = line_bot_api.get_message_content(message_id)
     with open("static/" + message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
