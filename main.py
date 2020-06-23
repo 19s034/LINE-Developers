@@ -64,13 +64,13 @@ def handle_image(event):
     # 画像を保存
     #ave_image(message_id, src_image_path)
     message_content = line_bot_api.get_message_content(message_id)
-    with open("static/" + event.message.id + ".jpg", "wb") as f:
+    with open("static/" + message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/" + event.message.id + ".jpg",
+        original_content_url="https://secret-lake-56663.herokuapp.com/static/" + message_id + ".jpg",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/" + message_id + ".jpg",
     )
 
     #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
