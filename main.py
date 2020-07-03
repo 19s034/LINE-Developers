@@ -101,12 +101,12 @@ def handle_image(event):
     # 画像比較用にfilter_sizeをファイル名に入れておく
     out.save('out/bokashi_{0}.jpg'.format(filter_size))
 
-    "static/" + message_id + ".jpg" = "out/bokashi_{0}.jpg"
-    
+    #"static/" + message_id + ".jpg" = "out/bokashi_{0}.jpg"
+
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/sttic/" + message_id + ".jpg",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/" + message_id + ".jpg",
+        original_content_url="https://secret-lake-56663.herokuapp.com/sttic/out/bokashi_{0}.jpg",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/out/bokashi_{0}.jpg",
     )
 
     #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
