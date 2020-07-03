@@ -9,6 +9,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
+1import sys
+
+sys.path.append('/path/to/search')
 from PIL import Image, ImageFilter
 import numpy as np
 
