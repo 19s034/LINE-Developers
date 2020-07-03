@@ -86,6 +86,7 @@ def handle_image(event):
     # numpyのarrayに変換
     img_pixels = np.array(img_pixels)
 
+
     for y in range(height - filter_size):
         for x in range(width - filter_size):
             # 縦、横 filter_size(pixel)分、RGB情報取得
