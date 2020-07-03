@@ -70,7 +70,6 @@ def handle_image(event):
         f.write(message_content.content)
 
 
-
     img = Image.open("static/" + message_id + ".jpg")
     width, height = img.size
 
