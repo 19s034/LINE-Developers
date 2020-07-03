@@ -59,8 +59,6 @@ def handle_message(event):
 def handle_image(event):
     message_id = event.message.id
 
-
-
     # 画像を保存
 
     message_content = line_bot_api.get_message_content(message_id)
