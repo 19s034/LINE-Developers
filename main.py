@@ -9,9 +9,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
-
-from PIL import Image, ImageFilter
-import numpy as np
+import cv2
 
 app = Flask(__name__)
 
@@ -70,39 +68,12 @@ def handle_image(event):
         f.write(message_content.content)
 
 
-    img = Image.open("static/" + message_id + ".jpg")
-    width, height = img.size
+    image = cv2.imread("static/" + message_id + ".jpg")
 
-    filter_size = 10
-    out = Image.new('RGB', (width - filter_size, height - filter_size))
+    for i in range(1, 100):
+        image = cv2.GaussianBlur(image, (5, 5), 0)
 
-    img_pixels = []
-    for y in range(height):
-        row = []
-        for x in range(width):
-            row.append(img.getpixel((x, y)))
-        # height毎に二次元配列としてappend
-        img_pixels.append(row)
-    # numpyのarrayに変換
-    img_pixels = np.array(img_pixels)
-
-
-    for y in range(height - filter_size):
-        for x in range(width - filter_size):
-            # 縦、横 filter_size(pixel)分、RGB情報取得
-            partial_img = img_pixels[y:y + filter_size, x:x + filter_size]
-            # 行をfilter_sizeの二乗、列を3(R/G/B)に変換
-            color_array = partial_img.reshape(filter_size ** 2, 3)
-            # RGB平均値を算出
-            mean_r, mean_g, mean_b = color_array.mean(axis=0)
-            # 算出されたRGB情報を該当ピクセルに設定
-            out.putpixel((x, y), (int(mean_r), int(mean_g), int(mean_b)))
-
-    out.show()
-    # 画像比較用にfilter_sizeをファイル名に入れておく
-    out.save("static/" + message_id + ".jpg".format(filter_size))
-
-    #"static/" + message_id + ".jpg" = "out/bokashi_{0}.jpg"
+    cv2.imwrite("static/" + message_id + ".jpg", image)
 
     # 画像の送信
     image_message = ImageSendMessage(
