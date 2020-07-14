@@ -8,7 +8,7 @@ from linebot import (
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
-import cv2  
+import cv2
 #import cv2,numpy
 
 
@@ -25,6 +25,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 #SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
 #MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
 #PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
+
 
 
 @app.route("/")
