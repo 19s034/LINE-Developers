@@ -26,8 +26,6 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 #MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
 #PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
 
-
-
 @app.route("/")
 def hello_world():
     return "hello world!"
