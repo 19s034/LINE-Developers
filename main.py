@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 
-import cv2,numpy
+#import cv2,numpy
 
 app = Flask(__name__)
 
@@ -66,12 +66,12 @@ def handle_image(event):
         f.write(message_content.content)
 
 
-    image = cv2.imread("static/" + message_id + ".jpg")
+    #image = cv2.imread("static/" + message_id + ".jpg")
 
-    for i in range(1, 100):
-        image = cv2.GaussianBlur(image, (5, 5), 0)
+    #for i in range(1, 100):
+        #image = cv2.GaussianBlur(image, (5, 5), 0)
 
-    cv2.imwrite("static/" + message_id + ".jpg", image)
+    #cv2.imwrite("static/" + message_id + ".jpg", image)
 
     # 画像の送信
     image_message = ImageSendMessage(
