@@ -8,7 +8,7 @@ from linebot import (
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
-import cv2  # OpenCVのインポート
+import cv2  
 #import cv2,numpy
 
 
