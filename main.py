@@ -11,6 +11,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
 import cv2  # OpenCVのインポート
 #import cv2,numpy
 
+
 app = Flask(__name__)
 
 
