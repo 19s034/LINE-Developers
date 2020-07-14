@@ -34,7 +34,7 @@ def hello_world():
 @app.route("/callback", methods=["POST"])
 def callback():
     # get X-Line-Signature header value
-    signature = request.headers["X-Line-Signature"]
+    signature = request.headers["X-Line-Signature"]     #lineしか受け付けない
 
     # get request body as text
     body = request.get_data(as_text=True)
@@ -62,16 +62,10 @@ def handle_image(event):
     # 画像を保存
 
     message_content = line_bot_api.get_message_content(message_id)
+
+
     with open("static/" + message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
-
-
-    #image = cv2.imread("static/" + message_id + ".jpg")
-
-    #for i in range(1, 100):
-        #image = cv2.GaussianBlur(image, (5, 5), 0)
-
-    #cv2.imwrite("static/" + message_id + ".jpg", image)
 
     # 画像の送信
     image_message = ImageSendMessage(
