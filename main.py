@@ -80,6 +80,7 @@ def handle_image(event):
     WIDTH = 960
     HEIGHT = 1706
 
+
     img = cv2.imread(fname)
     print(img[10, 20])
 
