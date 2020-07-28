@@ -74,7 +74,7 @@ def handle_image(event):
 
     
     gry = cv2.imread(fname, 0)
-    cv2.imwrite("static/"+ message_id + "gray.jpg", gry)
+    cv2.imwrite("static/gray.jpg", gry)
 
 
     # 画像の送信
