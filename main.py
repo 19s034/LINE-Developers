@@ -81,14 +81,14 @@ def handle_image(event):
     HEIGHT = 1706
 
     img = cv2.imread(fname)
-    print(img[1, 1])
+    #print(img[1, 1])
 
     for x in range(HEIGHT):
         for y in range(WIDTH):
-            b, g, r = img[x, y]
+            #b, g, r = img[x, y]
             if (b, g, r) == (255, 255, 255):
                 continue
-            img[x, y] = 0, g, r
+            img[x, y] = 0, 0, 255
 
     cv2.imwrite("static/gray.jpg", img)
 
