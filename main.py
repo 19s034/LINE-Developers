@@ -56,7 +56,10 @@ def handle_message(event):
 
 
 @handler.add(MessageEvent, message=ImageMessage)
-
+def mosaic_area(src, x, y, width, height, ratio=0.1):
+    dst = src.copy()
+    dst[y:y + height, x:x + width] = mosaic(dst[y:y + height, x:x + width], ratio)
+    return dst
 def handle_image(event):
     message_id = event.message.id
 
@@ -117,7 +120,7 @@ def handle_image(event):
     faces = face_cascade.detectMultiScale(src_gray)
 
     for x, y, w, h in faces:
-     dst_face = mosaic_area(src, x, y, w, h)
+        dst_face = mosaic_area(src, x, y, w, h)
 
     cv2.imwrite("static/gray.jpg", dst_face)
 
@@ -141,10 +144,7 @@ def handle_image(event):
        # for chunk in message_content.iter_content():
         #    f.write(chunk)
 
-def mosaic_area(src, x, y, width, height, ratio=0.1):
-    dst = src.copy()
-    dst[y:y + height, x:x + width] = mosaic(dst[y:y + height, x:x + width], ratio)
-    return dst
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
