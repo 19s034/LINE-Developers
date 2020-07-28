@@ -85,7 +85,7 @@ def handle_image(event):
 
     for x in range(HEIGHT):
         for y in range(WIDTH):
-            #b, g, r = img[x, y]
+            b, g, r = img[x, y]
             if (b, g, r) == (255, 255, 255):
                 continue
             img[x, y] = 0, 0, 255
