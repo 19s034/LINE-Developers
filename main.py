@@ -88,7 +88,7 @@ def handle_image(event):
             b, g, r = img[x, y]
             if (b, g, r) == (255, 255, 255):
                 continue
-            img[x, y] = b, g, r
+            img[x, y] = 0, g, r
 
     cv2.imwrite("static/gray.jpg", img)
 
