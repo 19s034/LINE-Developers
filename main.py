@@ -81,7 +81,7 @@ def handle_image(event):
     HEIGHT = 1706
 
     img = cv2.imread(fname)
-    print(img[15, 30])
+    print(img[1, 1])
 
     for x in range(HEIGHT):
         for y in range(WIDTH):
