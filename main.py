@@ -106,7 +106,7 @@ def handle_image(event):
     #画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
     img = cv2.resize(img, (img_width, img_height),interpolation=cv2.INTER_NEAREST)
 
-    cv2.imwrite(static/gray.jpg,img) #ファイル名'mosaic.png'でimgを保存
+    cv2.imwrite("static/gray.jpg",img) #ファイル名'mosaic.png'でimgを保存
 
 
     # 画像の送信
