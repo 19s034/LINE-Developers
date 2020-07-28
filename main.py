@@ -101,12 +101,12 @@ def handle_image(event):
     #オブジェクトimgのshapeメソッドの1つ目の戻り値(画像の高さ)をimg_heightに、2つ目の戻り値(画像の幅)をimg_widthに代入
     img_height,img_width=img.shape[:2]  
 
-    scale_factor=0.3 #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
+    scale_factor=0.1 #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
     img = cv2.resize(img,None,fx=scale_factor,fy=scale_factor) #縮小率の倍率で画像を縮小
     #画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
     img = cv2.resize(img, (img_width, img_height),interpolation=cv2.INTER_NEAREST)
 
-    cv2.imwrite("static/gray.jpg",img) #ファイル名'mosaic.png'でimgを保存
+    cv2.imwrite("static/gray.jpg", img) #ファイル名'mosaic.png'でimgを保存
 
 
     # 画像の送信
