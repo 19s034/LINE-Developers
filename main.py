@@ -15,7 +15,7 @@ import cv2
 app = Flask(__name__)
 
 
-
+face_cascade_path = "haarcascade_frontalface_default.xml"
 YOUR_CHANNEL_ACCESS_TOKEN = "d9TJaXv1KYVppBbVUrSZxF+XGe4N+IL9JtUpAA8VgJXk4OVmiYhiEgUMaDLq8Ic2idBZbBYcdwksMd3THXzSf5CHrLdtXi2i0Irq2iVaKw72MVNrKShwNr2JMQJ/yi0+XLA6hkEaE+0JqoXWzbDtTAdB04t89/1O/w1cDnyilFU="
 YOUR_CHANNEL_SECRET = "e0b5ca81f71074e9639844976085b288"
 
@@ -56,6 +56,7 @@ def handle_message(event):
 
 
 @handler.add(MessageEvent, message=ImageMessage)
+
 def handle_image(event):
     message_id = event.message.id
 
@@ -96,18 +97,29 @@ def handle_image(event):
 #-------------------------------------------------------------------------
 
     
-    img = cv2.imread(fname) #画像を読み出しオブジェクトimgに代入
+    #img = cv2.imread(fname) #画像を読み出しオブジェクトimgに代入
+#
+    ##オブジェクトimgのshapeメソッドの1つ目の戻り値(画像の高さ)をimg_heightに、2つ目の戻り値(画像の幅)をimg_widthに代入
+    #img_height,img_width=img.shape[:2]  
+#
+    #scale_factor=0.1 #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
+    #img = cv2.resize(img,None,fx=scale_factor,fy=scale_factor) #縮小率の倍率で画像を縮小
+    ##画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
+    #img = cv2.resize(img, (img_width, img_height),interpolation=cv2.INTER_NEAREST)
+#
+    #cv2.imwrite("static/gray.jpg", img) #ファイル名'mosaic.png'でimgを保存
 
-    #オブジェクトimgのshapeメソッドの1つ目の戻り値(画像の高さ)をimg_heightに、2つ目の戻り値(画像の幅)をimg_widthに代入
-    img_height,img_width=img.shape[:2]  
+    src = cv2.imread(fname)
+    face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
-    scale_factor=0.1 #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
-    img = cv2.resize(img,None,fx=scale_factor,fy=scale_factor) #縮小率の倍率で画像を縮小
-    #画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
-    img = cv2.resize(img, (img_width, img_height),interpolation=cv2.INTER_NEAREST)
+    src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-    cv2.imwrite("static/gray.jpg", img) #ファイル名'mosaic.png'でimgを保存
+    faces = face_cascade.detectMultiScale(src_gray)
 
+    for x, y, w, h in faces:
+     dst_face = mosaic_area(src, x, y, w, h)
+
+    cv2.imwrite("static/gray.jpg", dst_face)
 
     # 画像の送信
     image_message = ImageSendMessage(
@@ -129,6 +141,10 @@ def handle_image(event):
        # for chunk in message_content.iter_content():
         #    f.write(chunk)
 
+def mosaic_area(src, x, y, width, height, ratio=0.1):
+    dst = src.copy()
+    dst[y:y + height, x:x + width] = mosaic(dst[y:y + height, x:x + width], ratio)
+    return dst
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
