@@ -73,9 +73,24 @@ def handle_image(event):
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
     
-    gry = cv2.imread(fname, 1)
-    cv2.imwrite("static/gray.jpg", gry)
+    #gry = cv2.imread(fname, 1)
+    #cv2.imwrite("static/gray.jpg", gry)
 
+
+    WIDTH = 130
+    HEIGHT = 41
+
+    img = cv2.imread(fname)
+    print(img[15, 30])
+
+    for x in range(HEIGHT):
+        for y in range(WIDTH):
+            b, g, r = img[x, y]
+            if (b, g, r) == (255, 255, 255):
+                continue
+            img[x, y] = 0, g, r
+
+    cv2.imwrite("static/gray.jpg", img)
 
     # 画像の送信
     image_message = ImageSendMessage(
