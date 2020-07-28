@@ -65,14 +65,17 @@ def handle_image(event):
 
 
 
+    
+    with open("static/"+ message_id + ".jpg", "wb") as f:
+        f.write(message_content.content)
+
+
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
     
     gry = cv2.imread(fname, 0)
-    cv2.imwrite('gray.jpg', gry)
+    cv2.imwrite("static/"+ message_id + "gray.jpg", gry)
 
-    with open("static/gray.jpg", "wb") as f:
-        f.write(message_content.content)
 
     # 画像の送信
     image_message = ImageSendMessage(
