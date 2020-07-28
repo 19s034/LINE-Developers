@@ -58,7 +58,7 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def mosaic(src, ratio=0.1):
     small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
-    return cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
+    cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
 
 def handle_image(event):
     message_id = event.message.id
@@ -101,9 +101,11 @@ def handle_image(event):
 
     src = cv2.imread(fname)
 
-    dst_005 = mosaic(src, ratio=0.05)
+ 
+    ratio=0.05
+    small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+    dst_005 = cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
     cv2.imwrite("static/gray.jpg", dst_005)
-
 
     # 画像の送信
     image_message = ImageSendMessage(
