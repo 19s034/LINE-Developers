@@ -56,6 +56,10 @@ def handle_message(event):
 
 
 @handler.add(MessageEvent, message=ImageMessage)
+def mosaic(src, ratio=0.1):
+    small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+    return cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
+
 def handle_image(event):
     message_id = event.message.id
 
@@ -72,26 +76,39 @@ def handle_image(event):
 
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
-    
+    #画像の色を灰色に
     #gry = cv2.imread(fname, 1)
     #cv2.imwrite("static/gray.jpg", gry)
 
+    #----------------------------------------------------------
+    #画像サイズ
+    #WIDTH = 960        
+   #HEIGHT = 1706
 
-    WIDTH = 960
-    HEIGHT = 1706
+    #
+   #img = cv2.imread(fname)
+   #print(img[1, 80])
+
+   #for x in range(HEIGHT):
+   #    for y in range(WIDTH):
+   #        b, g, r = img[x, y]
+   #        if (b, g, r) == (255, 255, 255):
+   #            continue
+   #        img[x, y] = b, 0, 0
+
+   #cv2.imwrite("static/gray.jpg", img)
+#-------------------------------------------------------------------------
+
+    src = cv2.imread(fname)
 
 
-    img = cv2.imread(fname)
-    print(img[1, 80])
 
-    for x in range(HEIGHT):
-        for y in range(WIDTH):
-            b, g, r = img[x, y]
-            if (b, g, r) == (255, 255, 255):
-                continue
-            img[x, y] = b, 0, 0
+    dst_01 = mosaic(src)
+    cv2.imwrite("static/gray.jpg", dst_01)
 
-    cv2.imwrite("static/gray.jpg", img)
+    dst_005 = mosaic(src, ratio=0.05)
+    cv2.imwrite("static/gray.jpg", dst_005)
+
 
     # 画像の送信
     image_message = ImageSendMessage(
