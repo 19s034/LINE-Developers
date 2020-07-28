@@ -73,7 +73,7 @@ def handle_image(event):
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
     
-    gry = cv2.imread(fname, 0)
+    gry = cv2.imread(fname, 1)
     cv2.imwrite("static/gray.jpg", gry)
 
 
