@@ -66,24 +66,18 @@ def handle_image(event):
 
 
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
-    img = cv2.imread(fname)  # 画像を読み出しオブジェクトimgに代入
 
-    # オブジェクトimgのshapeメソッドの1つ目の戻り値(画像の高さ)をimg_heightに、2つ目の戻り値(画像の幅)をimg_widthに代入
-    img_height, img_width = img.shape[:2]
+    
+    gry = cv2.imread(fname, 0)
+    cv2.imwrite('gray.jpg', gry)
 
-    scale_factor = 0.1  # 縮小処理時の縮小率(小さいほどモザイクが大きくなる)
-    img = cv2.resize(img, None, fx=scale_factor, fy=scale_factor)  # 縮小率の倍率で画像を縮小
-    # 画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
-    img = cv2.resize(img, (img_width, img_height), interpolation=cv2.INTER_NEAREST)
-    cv2.imwrite('mosaic.png', img)  # ファイル名'mosaic.png'でimgを保存
-
-    with open("static/mosaic.jpg", "wb") as f:
+    with open("static/gray.jpg", "wb") as f:
         f.write(message_content.content)
 
     # 画像の送信
     image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+        original_content_url="https://secret-lake-56663.herokuapp.com/static/gray.jpg",
+        preview_image_url="https://secret-lake-56663.herokuapp.com/static/gray.jpg",
     )
 
     #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
