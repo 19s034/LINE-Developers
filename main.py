@@ -101,11 +101,6 @@ def handle_image(event):
 
     src = cv2.imread(fname)
 
-
-
-    dst_01 = mosaic(src)
-    cv2.imwrite("static/gray.jpg", dst_01)
-
     dst_005 = mosaic(src, ratio=0.05)
     cv2.imwrite("static/gray.jpg", dst_005)
 
