@@ -1,4 +1,10 @@
 Flask==1.1.2
 line-bot-sdk==1.16.0
+<<<<<<< HEAD
 opencv-python==4.3.0.36
 numpy==1.19.1
+=======
+Pillow==7.2.0
+numpy==1.19.0
+opencv-contrib-python==4.3.0.36
+>>>>>>> 505ac87739fbe0613373db9c34f14c18fa88856c
