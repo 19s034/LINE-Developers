@@ -77,8 +77,8 @@ def handle_image(event):
     #cv2.imwrite("static/gray.jpg", gry)
 
 
-    WIDTH = 130
-    HEIGHT = 41
+    WIDTH = 960
+    HEIGHT = 1706
 
     img = cv2.imread(fname)
     print(img[15, 30])
