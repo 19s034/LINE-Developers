@@ -121,7 +121,7 @@ def handle_image(event):
     faces = face_cascade.detectMultiScale(src_gray)
 
     for x, y, w, h in faces:
-        cv2.rectangle(src, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        #cv2.rectangle(src, (x, y), (x + w, y + h), (255, 0, 0), 2)
         face = src[y: y + h, x: x + w]
         face_gray = src_gray[y: y + h, x: x + w]
         eyes = eye_cascade.detectMultiScale(face_gray)
@@ -130,11 +130,11 @@ def handle_image(event):
 
     cv2.imwrite("static/gray.jpg", src)
 
-    faces = face_cascade.detectMultiScale(src_gray)
+    #faces = face_cascade.detectMultiScale(src_gray)
 
     ratio = 0.05
 
-    for x, y, w, h in faces:
+    for x, y, w, h in eyes:
         small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
         src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
 
