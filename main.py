@@ -134,7 +134,7 @@ def handle_image(event):
 
     ratio = 0.05
 
-    for x, y, w, h in eyes:
+    for x, y, w, h in faces:
         small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
         src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
 
