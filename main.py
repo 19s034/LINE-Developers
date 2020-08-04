@@ -132,7 +132,7 @@ def handle_image(event):
 
     #faces = face_cascade.detectMultiScale(src_gray)
 
-    ratio = 0.05
+    ratio = 0.1
 
     for x, y, w, h in eyes:
         small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
