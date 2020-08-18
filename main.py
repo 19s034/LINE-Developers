@@ -10,7 +10,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 import cv2
 #hagiwara
-#hagi
+
 
 
 app = Flask(__name__)
