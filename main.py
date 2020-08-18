@@ -59,6 +59,7 @@ def handle_message(event):
         TextSendMessage(text=event.message.text)
     )
 
+
 def handle_textmessage(event):
     line_bot_api.reply_message(
         event.reply_token,
@@ -67,6 +68,7 @@ def handle_textmessage(event):
             TextSendMessage(text="他の画像を送信してください。"),
         ]
     )
+
 
 
 @handler.add(MessageEvent, message=ImageMessage)
