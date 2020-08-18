@@ -49,10 +49,22 @@ def callback():
         abort(400)
     return "OK"
 
+
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text=event.message.text)
+        event.reply_token,
+        TextSendMessage(text=event.message.text)
+    )
+
+def handle_textmessage(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text),
+        TextSendMessage(text="顔、目を検知できませんでした。"),
+        TextSendMessage(text=event.message.id),
     )
 
 
@@ -64,95 +76,59 @@ def handle_image(event):
 
     message_content = line_bot_api.get_message_content(message_id)
 
-
-
-    
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
+    result = change_image(event)
+    if result:
+        line_bot_api.reply_message(
+            event.reply_token, ImageSendMessage(
+                original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+                preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+            )
+        )
+    else:
+        handle_message(event)
 
+def change_image(event):
+    message_id = event.message.id
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
 
-    #画像の色を灰色に
-    #gry = cv2.imread(fname, 1)
-    #cv2.imwrite("static/gray.jpg", gry)
 
-    #----------------------------------------------------------
-    #画像サイズ
-    #WIDTH = 960        
-   #HEIGHT = 1706
-
-    #
-   #img = cv2.imread(fname)
-   #print(img[1, 80])
-
-   #for x in range(HEIGHT):
-   #    for y in range(WIDTH):
-   #        b, g, r = img[x, y]
-   #        if (b, g, r) == (255, 255, 255):
-   #            continue
-   #        img[x, y] = b, 0, 0
-
-   #cv2.imwrite("static/gray.jpg", img)
-#-------------------------------------------------------------------------
-
-
-    
-    #img = cv2.imread(fname) #画像を読み出しオブジェクトimgに代入
-#
-    ##オブジェクトimgのshapeメソッドの1つ目の戻り値(画像の高さ)をimg_heightに、2つ目の戻り値(画像の幅)をimg_widthに代入
-    #img_height,img_width=img.shape[:2]
-#
-    #scale_factor=0.05 #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
-    #img = cv2.resize(img,None,fx=scale_factor,fy=scale_factor) #縮小率の倍率で画像を縮小
-    ##画像を元の画像サイズに拡大。ここで補完方法に'cv2.INTER_NEAREST'を指定することでモザイク状になる
-    #img = cv2.resize(img, (img_width, img_height),interpolation=cv2.INTER_NEAREST)
-#
-    #cv2.imwrite("static/gray.jpg", img) #ファイル名'mosaic.png'でimgを保存
-#
-
-    face_cascade = cv2.CascadeClassifier(face_cascade_path)
     eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
 
     src = cv2.imread(fname)
-    src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+    src_mosaic = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-    #faces = face_cascade.detectMultiScale(src_gray)
-    eyes = eye_cascade.detectMultiScale(src_gray)
-    #for x, y, w, h in faces:
-    #    #cv2.rectangle(src, (x, y), (x + w, y + h), (255, 0, 0), 2)
-    #    face = src[y: y + h, x: x + w]
-    #    face_gray = src_gray[y: y + h, x: x + w]
-    #    eyes = eye_cascade.detectMultiScale(face_gray)
-    #    for (ex, ey, ew, eh) in eyes:
-    #        cv2.rectangle(face, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+    eyes = eye_cascade.detectMultiScale(src_mosaic)
+
+    ratio = 0.05     #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
+
+
+# 検出した場合
+    #if len(facerect) > 0:
 #
-    #cv2.imwrite("static/gray.jpg", src)
+    #    # 検出した顔を囲む矩形の作成
+    #    for rect in facerect:
+    #        cv2.rectangle(image, tuple(rect[0:2]), tuple(rect[0:2] + rect[2:4]), color, thickness=2)
+    #else:
+    #    return False
+#
+    #cv2.imwrite(output_path, image)
+    ## 認識結果の保存
 
-    #faces = face_cascade.detectMultiScale(src_gray)
+    if len(eyes) > 0:
+        for x, y, w, h in eyes:  # 引数でeyesで取得した数分forループ
+            # y:はHEIGHT、x:はWEIGHT  fxはxの縮小率、fyはyの縮小率
+            small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+            src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
+    else:
+        return False
 
-    ratio = 0.1
+    cv2.imwrite("static/mosaic.jpg", src)
 
-    for x, y, w, h in eyes:
-        small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
-        src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
-
-    cv2.imwrite("static/gray.jpg", src)
-
-    # 画像の送信
-    image_message = ImageSendMessage(
-        original_content_url="https://secret-lake-56663.herokuapp.com/static/gray.jpg",
-        preview_image_url="https://secret-lake-56663.herokuapp.com/static/gray.jpg",
-    )
-
-    #app.logger.info("https://secret-lake-56663.herokuapp.com/static/{main_image_path}")
-    line_bot_api.reply_message(event.reply_token, image_message)
-
-    # 画像を削除する
-    #src_image_path.unlink()
-
-
+    return True
 #def save_image(message_id: str, save_path: str) -> None:
     #"""保存"""
     #message_content = line_bot_api.get_message_content(message_id)
