@@ -10,7 +10,8 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 import cv2
 #import cv2,numpy
-#hagi
+#hagi #hagi
+
 
 app = Flask(__name__)
 
