@@ -62,9 +62,10 @@ def handle_message(event):
 def handle_textmessage(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="目を検知できませんでした。"),
-        TextSendMessage(text="他の画像を送信してください。"),
-
+        [
+            TextSendMessage(text="目を検知できませんでした。"),
+            TextSendMessage(text="他の画像を送信してください。"),
+        ]
     )
 
 
