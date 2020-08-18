@@ -62,9 +62,9 @@ def handle_message(event):
 def handle_textmessage(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text),
-        TextSendMessage(text="顔、目を検知できませんでした。"),
-        TextSendMessage(text=event.message.id),
+        TextSendMessage(text="目を検知できませんでした。"),
+        TextSendMessage(text="他の画像を送信してください。"),
+
     )
 
 
@@ -88,7 +88,7 @@ def handle_image(event):
             )
         )
     else:
-        handle_message(event)
+        handle_textmessage(event)
 
 def change_image(event):
     message_id = event.message.id
