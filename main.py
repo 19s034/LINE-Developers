@@ -71,6 +71,7 @@ def handle_textmessage(event):
 
 
 
+
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     message_id = event.message.id
