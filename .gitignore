@@ -1,0 +1,8 @@
+# Node build artifacts
+nvm install node
+npm i -g heroku
+
+# Local development
+*.env
+*.dev
+.DS_Store
