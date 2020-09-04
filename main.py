@@ -63,6 +63,7 @@ def handle_message(event):
 
 
 def handle_textmessage(event):
+    print("ログ成功！！！！！！！！！")
     line_bot_api.reply_message(
         event.reply_token,
         [
@@ -87,6 +88,7 @@ def handle_image(event):
 
     result = change_image(event)
     if result:
+        print("ログ成功！！！！！！！！！")
         line_bot_api.reply_message(
             event.reply_token, ImageSendMessage(
                 original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
