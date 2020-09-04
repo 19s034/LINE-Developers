@@ -1,4 +1,6 @@
 import os
+import random
+
 from pathlib import Path
 
 from flask import Flask, abort, request
@@ -56,11 +58,30 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
+    number =  random.randint(0,3)
+    if number == 0:
+        line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text)
+        TextSendMessage(text="大吉")
+        #TextSendMessage(text=event.message.text)
     )
-
+    elif number == 1:
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="中吉")
+    )
+    elif number == 2:
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="吉")
+    )
+    else:
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="凶")
+    )
+    
+    
 
 def handle_textmessage(event):
     print("ログ成功！！！！！！！！！")
