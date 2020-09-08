@@ -1,5 +1,6 @@
 import os
 import random
+import json
 
 from pathlib import Path
 
@@ -106,6 +107,9 @@ def handle_image(event):
 
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
+
+    with open('data/src/test.json') as f:
+        df = json.load(f)
 
     result = change_image(event)
     if result:

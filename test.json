@@ -1,0 +1,27 @@
+{
+  "type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+    "type": "carousel",
+    "actions": [],
+    "columns": [
+      {
+        "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+        "title": "加工処理",
+        "text": "加工したい処理を選択してください",
+        "actions": [
+          {
+            "type": "message",
+            "label": "髪加工",
+            "text": "1"
+          },
+          {
+            "type": "message",
+            "label": "目元加工",
+            "text": "2"
+          }
+        ]
+      }
+    ]
+  }
+}
