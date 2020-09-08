@@ -1,6 +1,6 @@
 import os
 import random
-import json
+import json 
 
 from pathlib import Path
 
@@ -109,46 +109,19 @@ def handle_image(event):
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
-    #with open('test.json') as f:
-    #    df = json.load(f)
-    payload = {
-        "type": "template",
-        "altText": "this is a carousel template",
-        "template": {
-          "type": "carousel",
-          "actions": [],
-          "columns": [
-            {
-              "thumbnailImageUrl": "https://amd.c.yimg.jp/im_siggkqogv0kjmxkZ6SV3PgVJRw---x480-y640-q90-exp3h-pril/amd/20200905-00000242-spnannex-000-7-view.jpg",
-              "title": "加工処理",
-              "text": "加工したい処理を選択してください",
-              "actions": [
-                {
-                  "type": "message",
-                  "label": "髪加工",
-                  "text": "1"
-                },
-                {
-                  "type": "message",
-                  "label": "目元加工",
-                  "text": "2"
-                }
-            ]
-        }
-    ]
-  }
-}
+    json_open = open('test.json', 'r')
+    json_load = json.load(json_open)
 
 
 
-    container_obj = FlexSendMessage.new_from_json_dict(payload)
+    
     
     if event.reply_token == "00000000000000000000000000000000":
         return
         
     line_bot_api.push_message(
-        event.reply_token, 
-        messages=container_obj)
+        event.reply_token,
+        TextSendMessage(text=event.message.text))
 
     result = change_image(event)
     if result:
