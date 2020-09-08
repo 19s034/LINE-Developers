@@ -141,7 +141,7 @@ def handle_image(event):
 
     container_obj = FlexSendMessage.new_from_json_dict(payload)
 
-    line_bot_api.push_message('送りたい相手のUserID', messages=container_obj)
+    line_bot_api.push_message(message_id, messages=container_obj)
 
     result = change_image(event)
     if result:
