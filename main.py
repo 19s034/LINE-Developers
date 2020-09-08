@@ -119,7 +119,7 @@ def handle_image(event):
           "actions": [],
           "columns": [
             {
-              "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+              "thumbnailImageUrl": "https://amd.c.yimg.jp/im_siggkqogv0kjmxkZ6SV3PgVJRw---x480-y640-q90-exp3h-pril/amd/20200905-00000242-spnannex-000-7-view.jpg",
               "title": "加工処理",
               "text": "加工したい処理を選択してください",
               "actions": [
@@ -139,9 +139,13 @@ def handle_image(event):
   }
 }
 
-    container_obj = FlexSendMessage.new_from_json_dict(payload)
-
-    line_bot_api.reply_message(event.reply_token,messages=container_obj)
+    #container_obj = FlexSendMessage.new_from_json_dict(payload)
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+        
+    line_bot_api.reply_message(
+        event.reply_token,
+        FlexSendMessage.new_from_json_dict(payload))
 
     result = change_image(event)
     if result:
