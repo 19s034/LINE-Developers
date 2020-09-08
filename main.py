@@ -147,8 +147,7 @@ def handle_image(event):
         return
         
     line_bot_api.push_message(
-        event.reply_token,
-        message_id, 
+        event.reply_token, 
         messages=container_obj)
 
     result = change_image(event)
