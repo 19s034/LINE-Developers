@@ -10,7 +10,8 @@ from linebot import (
 )
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
-                            TextMessage, TextSendMessage)
+                            TextMessage, TextSendMessage, FlexSendMessage)
+
 import cv2
 
 
@@ -108,8 +109,39 @@ def handle_image(event):
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
-    with open('test.json') as f:
-        df = json.load(f)
+    #with open('test.json') as f:
+    #    df = json.load(f)
+    payload = {
+        "type": "template",
+        "altText": "this is a carousel template",
+        "template": {
+          "type": "carousel",
+          "actions": [],
+          "columns": [
+            {
+              "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+              "title": "加工処理",
+              "text": "加工したい処理を選択してください",
+              "actions": [
+                {
+                  "type": "message",
+                  "label": "髪加工",
+                  "text": "1"
+                },
+                {
+                  "type": "message",
+                  "label": "目元加工",
+                  "text": "2"
+                }
+            ]
+        }
+    ]
+  }
+}
+
+    container_obj = FlexSendMessage.new_from_json_dict(payload)
+
+    line_bot_api.push_message('送りたい相手のUserID', messages=container_obj)
 
     result = change_image(event)
     if result:
