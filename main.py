@@ -119,7 +119,7 @@ def handle_image(event):
         
     line_bot_api.reply_message(
         event.reply_token,
-        FlexSendMessage.new_from_json_dict("test.json"))
+        FlexSendMessage.new_from_json_dict(message_id))
 
     result = change_image(event)
     if result:
