@@ -118,10 +118,12 @@ def handle_image(event):
     
     if event.reply_token == "00000000000000000000000000000000":
         return
-        
+
+    container_obj = FlexSendMessage.new_from_json_dict(json_load) 
+
     line_bot_api.push_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        messages=container_obj)
 
     result = change_image(event)
     if result:
