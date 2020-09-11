@@ -108,89 +108,26 @@ def handle_image(event):
 
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
-    payload = {
-  "type": "bubble",
-  "hero": {
-    "type": "image",
-    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
-    "size": "full",
-    "aspectRatio": "20:13",
-    "aspectMode": "cover",
-    "action": {
-      "type": "uri",
-      "uri": "http://linecorp.com/"
-    }
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "Brown Cafe",
-        "weight": "bold",
-        "size": "xl"
-      }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "spacing": "sm",
-    "contents": [
-      {
-        "type": "button",
-        "style": "link",
-        "height": "sm",
-        "action": {
-          "type": "message",
-          "label": "action",
-          "text": "1"
-        }
-      },
-      {
-        "type": "button",
-        "style": "link",
-        "height": "sm",
-        "action": {
-          "type": "message",
-          "label": "action",
-          "text": "2"
-        }
-      },
-      {
-        "type": "spacer",
-        "size": "sm"
-      }
-    ],
-    "flex": 0
-  }
-}
 
-    container_obj = FlexSendMessage.new_from_json_dict(payload)
+
+
+    json_open = open('test.json', 'r')
+    json_load = json.load(json_open)
+
+
+
+    
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
-    
+
     if event.reply_token == "00000000000000000000000000000000":
         return
 
-    line_bot_api.push_message("U2bc15c6de86d580331832c8e042edc73", messages=container_obj)
+    container_obj = FlexSendMessage.new_from_json_dict(json_load) 
 
-    # json_open = open('test.json', 'r')
-    # json_load = json.load(json_open)
-
-
-
-    
-    
-    # if event.reply_token == "00000000000000000000000000000000":
-    #     return
-
-    # container_obj = FlexSendMessage.new_from_json_dict(json_load) 
-
-    # line_bot_api.push_message(
-    #     event.reply_token,
-    #     messages=container_obj)
+    line_bot_api.push_message(
+        "U2bc15c6de86d580331832c8e042edc73",
+        messages=container_obj)
 
     result = change_image(event)
     if result:
