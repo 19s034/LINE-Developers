@@ -168,8 +168,14 @@ def handle_image(event):
 }
 
     container_obj = FlexSendMessage.new_from_json_dict(payload)
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    if event.reply_token == "00000000000000000000000000000000":
+        return
 
-    line_bot_api.push_message(event.reply_token, messages=container_obj)
+    line_bot_api.reply_message(event.reply_token, messages=container_obj)
+
     # json_open = open('test.json', 'r')
     # json_load = json.load(json_open)
 
