@@ -174,7 +174,7 @@ def handle_image(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
 
-    line_bot_api.reply_message(event.reply_token, messages=container_obj)
+    line_bot_api.reply_message("U2bc15c6de86d580331832c8e042edc73", messages=container_obj)
 
     # json_open = open('test.json', 'r')
     # json_load = json.load(json_open)
