@@ -140,7 +140,12 @@ def flex_message(event):
 
     user_id = "U2bc15c6de86d580331832c8e042edc73"
     line_bot_api.push_message(user_id, messages=messages)
-
+    print(messages)
+    print(messages)
+    print(messages)
+    print(messages)
+    print(messages)
+    print(messages)
     return messages
 
 def change_image(event):
