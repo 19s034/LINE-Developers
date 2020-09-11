@@ -123,7 +123,7 @@ def handle_image(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
 
-    user_id = "U2bc15c6de86d580331832c8e042edc73 id"
+    user_id = "U2bc15c6de86d580331832c8e042edc73"
     line_bot_api.push_message(user_id, messages=messages)
 
 
