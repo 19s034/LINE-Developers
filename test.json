@@ -37,8 +37,8 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "hello",
-          "text": "action"
+          "label": "顔加工",
+          "text": "1"
         },
         "flex": 5
       },
@@ -48,8 +48,8 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "action",
-          "text": "hello"
+          "label": "髪加工",
+          "text": "2"
         },
         "flex": 5
       },
