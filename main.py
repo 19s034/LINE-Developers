@@ -111,9 +111,9 @@ def handle_image(event):
 
 
 
-    json_open = open('test.json', 'r')
-    json_load = json.load(json_open)
-
+    f = open('test.json', 'r')
+    messages = json.load(f)
+    messages = FlexSendMessage(alt_text="hoge", contents=messages)
 
 
     
@@ -123,11 +123,9 @@ def handle_image(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
 
-    container_obj = FlexSendMessage.new_from_json_dict(json_load) 
+    user_id = "U2bc15c6de86d580331832c8e042edc73 id"
+    line_bot_api.push_message(user_id, messages=messages)
 
-    line_bot_api.push_message(
-        "U2bc15c6de86d580331832c8e042edc73",
-        messages=container_obj)
 
     result = change_image(event)
     if result:
