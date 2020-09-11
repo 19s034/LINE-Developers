@@ -109,8 +109,23 @@ def handle_image(event):
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
+    flex_result = flex_message(event)
 
+    if flex_result == 1:
+        result = change_image(event)
+        if result:
+            print("ログ成功！！！！！！！！！")
+            line_bot_api.reply_message(
+                event.reply_token, ImageSendMessage(
+                    original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+                    preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+                )
+            )
+        else:
+            handle_textmessage(event)
+    
 
+def flex_message(event):
     f = open('test.json', 'r')
     messages = json.load(f)
     messages = FlexSendMessage(alt_text="test", contents=messages)
@@ -126,18 +141,7 @@ def handle_image(event):
     user_id = "U2bc15c6de86d580331832c8e042edc73"
     line_bot_api.push_message(user_id, messages=messages)
 
-
-    result = change_image(event)
-    if result:
-        print("ログ成功！！！！！！！！！")
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-                preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-            )
-        )
-    else:
-        handle_textmessage(event)
+    
 
 def change_image(event):
     message_id = event.message.id
