@@ -113,7 +113,7 @@ def handle_image(event):
 
     f = open('test.json', 'r')
     messages = json.load(f)
-    messages = FlexSendMessage(alt_text="hoge", contents=messages)
+    messages = FlexSendMessage(alt_text="test", contents=messages)
 
 
     
