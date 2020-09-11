@@ -112,7 +112,7 @@ def handle_image(event):
   "type": "bubble",
   "hero": {
     "type": "image",
-    "url": "https://amd.c.yimg.jp/im_siggkqogv0kjmxkZ6SV3PgVJRw---x480-y640-q90-exp3h-pril/amd/20200905-00000242-spnannex-000-7-view.jpg",
+    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
     "size": "full",
     "aspectRatio": "20:13",
     "aspectMode": "cover",
@@ -127,7 +127,7 @@ def handle_image(event):
     "contents": [
       {
         "type": "text",
-        "text": "画像処理",
+        "text": "Brown Cafe",
         "weight": "bold",
         "size": "xl"
       }
@@ -143,9 +143,9 @@ def handle_image(event):
         "style": "link",
         "height": "sm",
         "action": {
-          "type": "uri",
-          "label": "髪加工",
-          "uri": "https://linecorp.com"
+          "type": "message",
+          "label": "action",
+          "text": "1"
         }
       },
       {
@@ -153,9 +153,9 @@ def handle_image(event):
         "style": "link",
         "height": "sm",
         "action": {
-          "type": "uri",
-          "label": "顔加工",
-          "uri": "https://linecorp.com"
+          "type": "message",
+          "label": "action",
+          "text": "2"
         }
       },
       {
