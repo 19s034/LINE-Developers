@@ -108,22 +108,83 @@ def handle_image(event):
 
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
+    payload = {
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://amd.c.yimg.jp/im_siggkqogv0kjmxkZ6SV3PgVJRw---x480-y640-q90-exp3h-pril/amd/20200905-00000242-spnannex-000-7-view.jpg",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "http://linecorp.com/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "画像処理",
+        "weight": "bold",
+        "size": "xl"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "髪加工",
+          "uri": "https://linecorp.com"
+        }
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "顔加工",
+          "uri": "https://linecorp.com"
+        }
+      },
+      {
+        "type": "spacer",
+        "size": "sm"
+      }
+    ],
+    "flex": 0
+  }
+}
 
-    json_open = open('test.json', 'r')
-    json_load = json.load(json_open)
+    container_obj = FlexSendMessage.new_from_json_dict(payload)
+
+    line_bot_api.push_message(event.reply_token, messages=container_obj)
+    # json_open = open('test.json', 'r')
+    # json_load = json.load(json_open)
 
 
 
     
     
-    if event.reply_token == "00000000000000000000000000000000":
-        return
+    # if event.reply_token == "00000000000000000000000000000000":
+    #     return
 
-    container_obj = FlexSendMessage.new_from_json_dict(json_load) 
+    # container_obj = FlexSendMessage.new_from_json_dict(json_load) 
 
-    line_bot_api.push_message(
-        event.reply_token,
-        messages=container_obj)
+    # line_bot_api.push_message(
+    #     event.reply_token,
+    #     messages=container_obj)
 
     result = change_image(event)
     if result:
