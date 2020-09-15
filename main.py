@@ -66,6 +66,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text="大吉")
         #TextSendMessage(text=event.message.text)
+        
     )
     elif number == 1:
         line_bot_api.reply_message(
@@ -113,10 +114,9 @@ def handle_image(event):
 
     
     result = change_image(event)
-    print(event.message)
-    print(message_content.content)
-
-    if event.message.text == "1":
+    print("uooooooooooooooooooo\n\n\n\n\n\n")
+    print(event.TextMessage.text)
+    if event.TextMessage.text == 1:
 
         line_bot_api.reply_message(
             event.reply_token, ImageSendMessage(
