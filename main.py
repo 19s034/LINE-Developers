@@ -113,9 +113,9 @@ def handle_image(event):
 
     
     result = change_image(event)
-    print(event.message.text)
-    print(message_content)
-    
+    print(event.message)
+    print(message_content.content)
+
     if event.message.text == "1":
 
         line_bot_api.reply_message(
