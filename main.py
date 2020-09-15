@@ -113,16 +113,16 @@ def handle_image(event):
 
     
     result = change_image(event)
-    if result:
-        print("ログ成功！！！！！！！！！")
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-                preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-            )
+    #if result:
+
+    line_bot_api.reply_message(
+        event.reply_token, ImageSendMessage(
+            original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+            preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
         )
-    else:
-        handle_textmessage(event)
+    )
+    #else:
+    #    handle_textmessage(event)
     
 
 def flex_message(event):
