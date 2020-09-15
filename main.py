@@ -66,7 +66,6 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text="大吉")
         #TextSendMessage(text=event.message.text)
-        
     )
     elif number == 1:
         line_bot_api.reply_message(
@@ -114,9 +113,7 @@ def handle_image(event):
 
     
     result = change_image(event)
-    print("uooooooooooooooooooo\n\n\n\n\n\n")
-    print(event.TextMessage.text)
-    if event.TextMessage.text == 1:
+    if result:
 
         line_bot_api.reply_message(
             event.reply_token, ImageSendMessage(
@@ -124,8 +121,8 @@ def handle_image(event):
                 preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
             )
         )
-    #else:
-       # handle_textmessage(event)
+    else:
+        handle_textmessage(event)
     
 
 def flex_message(event):
