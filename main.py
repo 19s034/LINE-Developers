@@ -113,8 +113,8 @@ def handle_image(event):
 
     
     result = change_image(event)
-    
-    if TextMessage == 1:
+
+    if TextMessage == "1":
 
         line_bot_api.reply_message(
             event.reply_token, ImageSendMessage(
@@ -122,8 +122,8 @@ def handle_image(event):
                 preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
             )
         )
-    else:
-        handle_textmessage(event)
+    #else:
+       # handle_textmessage(event)
     
 
 def flex_message(event):
