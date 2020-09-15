@@ -114,7 +114,7 @@ def handle_image(event):
     
     result = change_image(event)
 
-    if TextMessage == "1":
+    if event.message.text == "1":
 
         line_bot_api.reply_message(
             event.reply_token, ImageSendMessage(
