@@ -13,6 +13,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage, FlexSendMessage)
 
 import cv2
+import numpy as np
 
 
 
@@ -112,17 +113,17 @@ def handle_image(event):
     flex_result = flex_message(event)
 
     
-    result = change_image(event)
-    if result:
+    change_image(event)
+    #if result:
 
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-                preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
-            )
+    line_bot_api.reply_message(
+        event.reply_token, ImageSendMessage(
+            original_content_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
+            preview_image_url="https://secret-lake-56663.herokuapp.com/static/mosaic.jpg",
         )
-    else:
-        handle_textmessage(event)
+    )
+    #else:
+    handle_textmessage(event)
     
 
 def flex_message(event):
@@ -190,6 +191,22 @@ def change_image(event):
        # for chunk in message_content.iter_content():
         #    f.write(chunk)
 
+def change_image2(event):
+    message_id = event.message.id
+    img = "static/" + message_id + ".jpg"  # 画像ファイル名
+
+    height = img.shape[0]
+    width = img.shape[1]
+    img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
+    hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
+    hsv_2 = np.copy(hsv)
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
+    bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+    #cv2.imshow('image',bgr)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
+
+    cv2.imwrite("static/mosaic.jpg", bgr)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
