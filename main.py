@@ -193,10 +193,13 @@ def change_image(event):
 
 def change_image2(event):
     message_id = event.message.id
-    img = "static/" + message_id + ".jpg"  # 画像ファイル名
+    fname = "static/" + message_id + ".jpg"  # 画像ファイル名
+    img = cv2.imread(fname)
 
-    height = img.shape[:0]
-    width = img.shape[:1]
+
+    height = img.shape[0]
+    width = img.shape[1]
+
     img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
     hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
@@ -207,7 +210,8 @@ def change_image2(event):
     #cv2.destroyAllWindows()
 
     cv2.imwrite("static/mosaic.jpg", bgr)
-
+    cv2.waitKey(0)
+#https://teratail.com/questions/284276
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
