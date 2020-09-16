@@ -113,7 +113,7 @@ def handle_image(event):
     flex_result = flex_message(event)
 
     
-    change_image(event)
+    change_image2(event)
     #if result:
 
     line_bot_api.reply_message(
