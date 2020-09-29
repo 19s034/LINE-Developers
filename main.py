@@ -191,6 +191,7 @@ def change_image(event):
        # for chunk in message_content.iter_content():
         #    f.write(chunk)
 
+
 def change_image2(event):
     message_id = event.message.id
     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
