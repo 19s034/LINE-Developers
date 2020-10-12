@@ -57,6 +57,13 @@ def handle_message(event):
         with open(path_w2) as f2:
             work1 = f2.read()
         handle_send_message2(work,work1)
+    if event.message.text == "2":
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        handle_send_message3(work,work1)
 
 
 
@@ -151,7 +158,7 @@ def handle_send_message(event):
 #画像送信処理
 def handle_send_message2(event,relpy):
     #mozaiku(event)
-    result = change_image2(event)
+    result = change_image(event)
     reply = str(relpy)
     if result:
         line_bot_api.reply_message(
@@ -164,6 +171,21 @@ def handle_send_message2(event,relpy):
     else:
         handle_textmessage(event)
 
+#画像送信処理
+def handle_send_message3(event):
+    #mozaiku(event)
+    result = change_image2(event)
+
+    if result:
+        line_bot_api.reply_message(
+            event.reply_token, ImageSendMessage(
+                original_content_url=FQDN + "/static/" + event.message.id + "_face.jpg",
+                preview_image_url=FQDN + "/static/" + event.message.id + "_face.jpg",
+            )
+            )
+
+    else:
+        handle_textmessage(event)
 
 #囲う処理
 def change_image(event):
