@@ -262,7 +262,7 @@ def change_image(event):
 
 
 
-def get_head_mask(event,img):
+def get_head_mask(img):
  
 
     cascadePath = "haarcascade_frontalface_default.xml"
