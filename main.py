@@ -176,16 +176,15 @@ def handle_send_message3(event):
     #mozaiku(event)
     result = change_image2(event)
 
-    if result:
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-            )
-            )
-
-    else:
-        handle_textmessage(event)
+    #if result:
+    line_bot_api.reply_message(
+        event.reply_token, ImageSendMessage(
+            original_content_url=FQDN + "/static/" + event.message.id + "_face.jpg",
+            preview_image_url=FQDN + "/static/" + event.message.id + "_face.jpg",
+        )
+    )
+    # else:
+    #     handle_textmessage(event)
 
 #囲う処理
 def change_image(event):
