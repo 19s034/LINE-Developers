@@ -172,9 +172,10 @@ def handle_send_message2(event,relpy):
         handle_textmessage(event)
 
 #画像送信処理
-def handle_send_message3(event):
+def handle_send_message3(event,relpy):
     #mozaiku(event)
     result = change_image2(event)
+    reply = str(relpy)
 
     #if result:
     line_bot_api.reply_message(
