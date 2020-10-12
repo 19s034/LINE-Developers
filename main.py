@@ -166,7 +166,7 @@ def handle_send_message2(event,relpy):
                 original_content_url=FQDN + "/static/" + event + "_face.jpg",
                 preview_image_url=FQDN + "/static/" + event + "_face.jpg",
             )
-            )
+        )
 
     else:
         handle_textmessage(event)
@@ -179,10 +179,10 @@ def handle_send_message3(event,relpy):
 
     #if result:
     line_bot_api.reply_message(
-        event.reply_token, ImageSendMessage(
-            original_content_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-            preview_image_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-        )
+            reply, ImageSendMessage(
+                original_content_url=FQDN + "/static/" + event + "_face.jpg",
+                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+            )
     )
     # else:
     #     handle_textmessage(event)
