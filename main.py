@@ -330,6 +330,7 @@ def change_image2(event):
     topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
 
 
+
     # We remove the face by the color of the skin
     lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
     upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
