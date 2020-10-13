@@ -354,13 +354,21 @@ def change_image2(event):
         for c in cnts[0]:
             print(c)
 
-    # Display the image in a loop
-    while True:
+
+    if bool:
+        # 認識結果の保存
         cv2.imwrite(output_path, image)
-        #cv2.imshow("image1", image)
-        # Exit to Esc
-        # if cv2.waitKey(5) == 27:
-        #     break
+        #cv2.imwrite(output_path2, image)
+        return True
+    else:
+        return False
+    # # Display the image in a loop
+    # while True:
+    #     cv2.imwrite(output_path, image)
+    #     #cv2.imshow("image1", image)
+    #     # Exit to Esc
+    #     if cv2.waitKey(5) == 27:
+    #         break
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
