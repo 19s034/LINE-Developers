@@ -177,15 +177,16 @@ def handle_send_message3(event,relpy):
     result = change_image2(event)
     reply = str(relpy)
 
-    #if result:
-    line_bot_api.reply_message(
+    if result:
+        line_bot_api.reply_message(
             reply, ImageSendMessage(
                 original_content_url=FQDN + "/static/" + event + "_face.jpg",
                 preview_image_url=FQDN + "/static/" + event + "_face.jpg",
             )
-    )
-    # else:
-    #     handle_textmessage(event)
+        )
+
+    else:
+        handle_textmessage(event)
 
 #囲う処理
 def change_image(event):
@@ -351,6 +352,7 @@ def change_image2(event):
         cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
+        cv2.fillPoly(image, pts =[cnts[0]], color=(255,255,255))
         for c in cnts[0]:
             print(c)
 
