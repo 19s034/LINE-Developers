@@ -352,7 +352,7 @@ def change_image2(event):
         cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
-        cv2.fillPoly(image, pts =[cnts[0]], color=(224,255,255))
+        cv2.fillPoly(image, pts =[cnts[0]], color=(192,192,192))
         for c in cnts[0]:
             print(c)
 
