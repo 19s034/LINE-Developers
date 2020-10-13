@@ -329,19 +329,24 @@ def change_image2(event):
     cnt=cnts[0]
     topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
 
+    # Convert BGR to HSV
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    # define range of blue color in HSV
+    lower_blue = np.array([110,50,50], dtype="uint8")
+    upper_blue = np.array([130,255,255], dtype="uint8")
+
+    # Threshold the HSV image to get only blue colors
+    skinMask = cv2.inRange(hsv, lower_blue, upper_blue)
 
 
-    # We remove the face by the color of the skin
-    lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
-    upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
-    #converted = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)   # We translate into HSV color format
+    # # We remove the face by the color of the skin
+    # lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
+    # upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
+    # converted = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)   # We translate into HSV color format
 
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
-    hsv_2 = np.copy(hsv)
-    hsv_2[:, : , 0] = np.where((hsv[:, : , 0]>16) & (hsv[:, : , 0]<25), hsv[:, : , (2)] * 0.2, hsv[:, : , 0])
-    converted = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
-
-    skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
+    
+    # skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
     mask[skinMask == 255] = 0   # We remove the face mask from the mask of the head
 
     kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
@@ -359,7 +364,7 @@ def change_image2(event):
         cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
-        cv2.fillPoly(image, pts =[cnts[0]], color=converted)
+        cv2.fillPoly(image, pts =[cnts[0]])
         
         for c in cnts[0]:
             print(c)
