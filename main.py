@@ -14,11 +14,11 @@ path_w1 = 'saveid.txt'
 path_w2 = 'savereply.txt'
 app = Flask(__name__)
 
-YOUR_CHANNEL_ACCESS_TOKEN = "d9TJaXv1KYVppBbVUrSZxF+XGe4N+IL9JtUpAA8VgJXk4OVmiYhiEgUMaDLq8Ic2idBZbBYcdwksMd3THXzSf5CHrLdtXi2i0Irq2iVaKw72MVNrKShwNr2JMQJ/yi0+XLA6hkEaE+0JqoXWzbDtTAdB04t89/1O/w1cDnyilFU="
-YOUR_CHANNEL_SECRET = "e0b5ca81f71074e9639844976085b288"
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-FQDN = "https://secret-lake-56663.herokuapp.com"
+FQDN = os.environ["FQDN"]
 
 
 @app.route("/callback", methods=["POST"])
@@ -88,7 +88,7 @@ def flex(event):
     text_save_reply(reply_work)
     json_open = open('test.json', 'r')
     json_data = json.load(json_open)
-    user_id = "U2bc15c6de86d580331832c8e042edc73"
+    user_id = os.environ["USER_ID"]
     #print("json_data: {}".format(json_data.get("hero").get("url")))
     #print(json_data.get("hero").get("url"))
     #json_data["hero"]
