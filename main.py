@@ -373,6 +373,7 @@ def change_image2(event):
     #     if cv2.waitKey(5) == 27:
     #         break
 
+
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
