@@ -80,7 +80,59 @@ def text_save_reply(work):
         f.write(s)
 
 
-def flex(event):
+#def flex(event):
+#    work = event.message.id
+#    reply_work = event.reply_token
+#    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+#    text_save_id(work)
+#    text_save_reply(reply_work)
+#    json_open = open('test.json', 'r')
+#    json_data = json.load(json_open)
+#    user_id = os.environ["USER_ID"]
+#    #print("json_data: {}".format(json_data.get("hero").get("url")))
+#    #print(json_data.get("hero").get("url"))
+#    #json_data["hero"]
+#    #message = line_bot_api.reply_message(
+#    #    event.reply_token,
+#    #    [
+#    #        FlexSendMessage(
+#    #        alt_text="flex",
+#    #        contents=BubbleContainer.new_from_json_dict(json_data)
+#    #        )
+#    #    ]
+#    #)
+#
+#    messages = FlexSendMessage(alt_text="test", contents=json_data)
+#    print("フレックスメッセージ中身: {}".format(messages))
+#    if event.reply_token == "00000000000000000000000000000000":
+#        return
+#    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+#        return
+#        
+#    line_bot_api.push_message(user_id, messages=messages)
+
+
+def handle_textmessage(event):
+    line_bot_api.reply_message(event.reply_token,
+        [
+            #TextSendMessage(text=event.message.text),
+            TextSendMessage(text="顔、目を検知できませんでした。"),
+            #TextSendMessage(text=event.message.id),
+        ]
+        )
+
+#画像受信後処理
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image_message(event):
+    print("メッセージID")
+    print(event.message.id)
+    message_content = line_bot_api.get_message_content(event.message.id)
+    if not os.path.exists('static'):
+        os.mkdir('static/')
+    with open("static/" + event.message.id + ".jpg", "wb") as f:
+        f.write(message_content.content)
+    
+
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -110,30 +162,7 @@ def flex(event):
         return
         
     line_bot_api.push_message(user_id, messages=messages)
-
-
-def handle_textmessage(event):
-    line_bot_api.reply_message(event.reply_token,
-        [
-            #TextSendMessage(text=event.message.text),
-            TextSendMessage(text="顔、目を検知できませんでした。"),
-            #TextSendMessage(text=event.message.id),
-        ]
-        )
-
-#画像受信後処理
-@handler.add(MessageEvent, message=ImageMessage)
-def handle_image_message(event):
-    print("メッセージID")
-    print(event.message.id)
-    message_content = line_bot_api.get_message_content(event.message.id)
-    if not os.path.exists('static'):
-        os.mkdir('static/')
-    with open("static/" + event.message.id + ".jpg", "wb") as f:
-        f.write(message_content.content)
-    
-
-    flex(event)
+    #flex(event)
 
     
 
