@@ -354,7 +354,7 @@ def change_image2(event):
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
         green = np.uint8([[[0,255,0 ]]])
         hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
-        cv2.fillPoly(image, pts =[cnts[0]], color=hsv_green)
+        cv2.fillPoly(image, pts =[cnts[0]], color=green)
         
         for c in cnts[0]:
             print(c)
