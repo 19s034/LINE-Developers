@@ -358,7 +358,7 @@ def change_image2(event):
        # green = np.uint8([[[0,255,0 ]]])
         bgr = cv2.cvtColor(np.array([[[0,255,0]]], dtype=np.uint8), cv2.COLOR_HSV2BGR)[0][0]
         #ポリゴンの領域を塗りつぶす
-        cv2.fillPoly(image, pts =[cnts[0]], color=bgr)
+        cv2.fillPoly(image, pts =[cnts[0]], color=(bgr[2], bgr[1], bgr[0]))
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
