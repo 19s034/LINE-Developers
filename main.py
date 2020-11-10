@@ -342,20 +342,26 @@ def change_image2(event):
     i1 = cv2.bitwise_and(image, image, mask=mask)
 
 
-    # If the head is bald, then we deduce that the bald head shows the coordinates of the top point of the head
+    # 髪の毛なし
     if is_bold(topmost,mask):
         cv2.rectangle(image,topmost,topmost,(0,0,255),5)
         print(topmost)
 
-    # Otherwise we write that we are not bald and display the coordinates of the largest contour
+
+
+    # 髪の毛あり
     else:
+        #輪郭取得
         cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
-        cv2.fillPoly(image, pts =[cnts[0]])
         green = np.uint8([[[0,255,0 ]]])
-        hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
-        image[:] = hsv_green
+
+        #ポリゴンの領域を塗りつぶす
+        cv2.fillPoly(image, pts =[cnts[0]], color=cv2.cvtColor(green,cv2.COLOR_BGR2HSV))
+        #green = np.uint8([[[0,255,0 ]]])
+        #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
+        #image[:] = hsv_green
         for c in cnts[0]:
             print(c)
 
