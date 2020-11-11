@@ -394,6 +394,8 @@ def change_image2(event):
         # 指定した色に基づいたマスク画像の生成
         mask = cv2.inRange(hsv, lower_color, upper_color)
         output = cv2.bitwise_and(hsv, hsv, mask = mask)
+        print(output)
+        print("\n\n\n\n\n\n\n\n\n")
         bgr_color = output + (0,0,80)
         cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
 
