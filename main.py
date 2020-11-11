@@ -309,28 +309,28 @@ def is_bold(pnt, hair_mask):
         print("Not Bold")
         return False
 
-def hsv_to_rgb(h,s,v):
-#    h = 0 ~ 360
-#    s = 0 ~ 255
-#    v = 0 ~ 255
-    i = int(h / 60.0)
-    mx = v
-    mn = v - ((s / 255.0) * v)
-    if h is None:
-        return(0,0,0)
-    if i == 0:
-        (r1,g1,b1) = (mx,(h/60.0)*(mx-mn)+mn,mn)
-    elif i == 1:
-        (r1,g1,b1) = (((120.0-h)/60.0)*(mx-mn)+mn,mx,mn)
-    elif i == 2:
-        (r1,g1,b1) = (mn,mx,((h-120.0)/60.0)*(mx-mn)+mn)
-    elif i == 3:
-        (r1,g1,b1) = (mn,((240.0-h)/60.0)*(mx-mn)+mn,mx)
-    elif i == 4:
-        (r1,g1,b1) = (((h-240.0)/60.0)*(mx-mn)+mn,mn,mx)
-    elif 5 <= i:
-        (r1,g1,b1) = (mx,mn,((360.0-h)/60.0)*(mx-mn)+mn)
-    return (int(r1), int(g1), int(b1))
+#def hsv_to_rgb(h,s,v):
+##    h = 0 ~ 360
+##    s = 0 ~ 255
+##    v = 0 ~ 255
+#    i = int(h / 60.0)
+#    mx = v
+#    mn = v - ((s / 255.0) * v)
+#    if h is None:
+#        return(0,0,0)
+#    if i == 0:
+#        (r1,g1,b1) = (mx,(h/60.0)*(mx-mn)+mn,mn)
+#    elif i == 1:
+#        (r1,g1,b1) = (((120.0-h)/60.0)*(mx-mn)+mn,mx,mn)
+#    elif i == 2:
+#        (r1,g1,b1) = (mn,mx,((h-120.0)/60.0)*(mx-mn)+mn)
+#    elif i == 3:
+#        (r1,g1,b1) = (mn,((240.0-h)/60.0)*(mx-mn)+mn,mx)
+#    elif i == 4:
+#        (r1,g1,b1) = (((h-240.0)/60.0)*(mx-mn)+mn,mn,mx)
+#    elif 5 <= i:
+#        (r1,g1,b1) = (mx,mn,((360.0-h)/60.0)*(mx-mn)+mn)
+#    return (int(r1), int(g1), int(b1))
 
 def change_image2(event):
     image_file = event + ".jpg"
@@ -380,12 +380,17 @@ def change_image2(event):
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
        # green = np.uint8([[[0,255,0 ]]])
-        bgr = cv2.cvtColor(np.array([[[0,255,0]]], dtype=np.uint8), cv2.COLOR_HSV2BGR)[0][0]
+        #bgr = cv2.cvtColor(np.array([[[0,255,0]]], dtype=np.uint8), cv2.COLOR_HSV2BGR)[0][0]
         #ポリゴンの領域を塗りつぶす
         
-        test_color = hsv_to_rgb(300, 200 , 200)
+        #test_color = hsv_to_rgb(300, 200 , 200)
+        
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
+        hsv_2 = np.copy(hsv)
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
+        bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+        cv2.fillPoly(image, pts =[cnts[0]], color=bgr)
 
-        cv2.fillPoly(image, pts =[cnts[0]], color=test_color)
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
