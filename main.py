@@ -385,10 +385,11 @@ def change_image2(event):
         
         #test_color = hsv_to_rgb(300, 200 , 200)
         
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
-        hsv_2 = np.copy(hsv)
-        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
-        bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+
+        bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+  
         cv2.fillPoly(image, pts =[cnts[0]], color=bgr)
 
         #green = np.uint8([[[0,255,0 ]]])
