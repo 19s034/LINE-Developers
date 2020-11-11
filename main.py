@@ -384,9 +384,18 @@ def change_image2(event):
         #ポリゴンの領域を塗りつぶす
         
         #test_color = hsv_to_rgb(300, 200 , 200)
-        
-        
-        cv2.fillPoly(image, pts =[cnts[0]], color=+(0,0,80))
+        # 色基準で2値化する。
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+        # 色の範囲を指定する
+        lower_color = np.array([0, 0, 0])
+        upper_color = np.array([255, 255, 255])
+
+        # 指定した色に基づいたマスク画像の生成
+        mask = cv2.inRange(hsv, lower_color, upper_color)
+        output = cv2.bitwise_and(hsv, hsv, mask = mask)
+        bgr_color = output + (0,0,80)
+        cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
 
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
