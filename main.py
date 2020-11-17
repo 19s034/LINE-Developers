@@ -396,9 +396,10 @@ def change_image2(event):
         output = cv2.bitwise_and(hsv, hsv, mask = mask)
         print(output)
         print("\n\n\n\n\n\n\n\n\n")
-        bgr_color = output + (0,0,80)
+        bgr_output = colorsys.hsv_to_rgb(output)
+        bgr_color = bgr_output + (0,0,80)
         cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
-
+        #cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
