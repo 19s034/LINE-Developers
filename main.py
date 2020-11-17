@@ -333,7 +333,7 @@ def is_bold(pnt, hair_mask):
 #    return (int(r1), int(g1), int(b1))
 
 def hsv2rgb(h,s,v):
-    return Tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
+    return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 def change_image2(event):
     image_file = event + ".jpg"
