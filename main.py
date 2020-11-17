@@ -383,7 +383,7 @@ def change_image2(event):
         #bgr = cv2.cvtColor(np.array([[[0,255,0]]], dtype=np.uint8), cv2.COLOR_HSV2BGR)[0][0]
         #ポリゴンの領域を塗りつぶす
         
-        
+
         #test_color = hsv_to_rgb(300, 200 , 200)
         # 色基準で2値化する。
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -398,7 +398,7 @@ def change_image2(event):
         output = cv2.bitwise_and(hsv, hsv, mask = mask)
         print(output)
         print("\n\n\n\n\n\n\n\n\n")
-        bgr_output = colorsys.hsv_to_rgb(output)
+        bgr_output = colorsys.hsv_to_rgb(output[3])
         bgr_color = bgr_output + (0,0,80)
         cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
         #cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
