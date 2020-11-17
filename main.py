@@ -332,6 +332,9 @@ def is_bold(pnt, hair_mask):
 #        (r1,g1,b1) = (mx,mn,((360.0-h)/60.0)*(mx-mn)+mn)
 #    return (int(r1), int(g1), int(b1))
 
+def hsv2rgb(h,s,v):
+    return Tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
+
 def change_image2(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
@@ -384,24 +387,26 @@ def change_image2(event):
         #ポリゴンの領域を塗りつぶす
         
 
-        #test_color = hsv_to_rgb(300, 200 , 200)
-        # 色基準で2値化する。
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        # #test_color = hsv_to_rgb(300, 200 , 200)
+        # # 色基準で2値化する。
+        # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        # 色の範囲を指定する
-        lower_color = np.array([0, 0, 0])
-        upper_color = np.array([255, 255, 255])
+        # # 色の範囲を指定する
+        # lower_color = np.array([0, 0, 0])
+        # upper_color = np.array([255, 255, 255])
 
 
-        # 指定した色に基づいたマスク画像の生成
-        mask = cv2.inRange(hsv, lower_color, upper_color)
-        output = cv2.bitwise_and(hsv, hsv, mask = mask)
-        print(output)
-        print("\n\n\n\n\n\n\n\n\n")
-        bgr_output = colorsys.hsv_to_rgb(output[3])
-        bgr_color = bgr_output + (0,0,80)
-        cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
-        #cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
+        # # 指定した色に基づいたマスク画像の生成
+        # mask = cv2.inRange(hsv, lower_color, upper_color)
+        # output = cv2.bitwise_and(hsv, hsv, mask = mask)
+        # print(output)
+        # print("\n\n\n\n\n\n\n\n\n")
+        # bgr_output = colorsys.hsv_to_rgb(output[3])
+        # bgr_color = bgr_output + (0,0,80)
+        # cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
+        
+        bgr = hsv2rgb(0.5,0.5,0.5)
+        cv2.fillPoly(image, pts =[cnts[0]], color= bgr)
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
