@@ -332,8 +332,8 @@ def is_bold(pnt, hair_mask):
 #        (r1,g1,b1) = (mx,mn,((360.0-h)/60.0)*(mx-mn)+mn)
 #    return (int(r1), int(g1), int(b1))
 
-def hsv2rgb(h,s,v):
-    return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
+#def hsv2rgb(h,s,v):
+#    return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 def change_image2(event):
     image_file = event + ".jpg"
@@ -381,6 +381,7 @@ def change_image2(event):
         #輪郭取得
         cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+
         cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
        # green = np.uint8([[[0,255,0 ]]])
         #bgr = cv2.cvtColor(np.array([[[0,255,0]]], dtype=np.uint8), cv2.COLOR_HSV2BGR)[0][0]
@@ -405,8 +406,16 @@ def change_image2(event):
         # bgr_color = bgr_output + (0,0,80)
         # cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
         
-        bgr = hsv2rgb(0.5,0.5,0.5)
-        cv2.fillPoly(image, pts =[cnts[0]], color= bgr)
+
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) #色配置の変換 BGR→RGB
+ 
+        img_array = np.asarray(image) #numpyで扱える配列をつくる
+        img_array[:,:, (0,1)]=0
+
+        # bgr = hsv2rgb(0.5,0.5,0.5)
+        # print(bgr)
+        # print("\n\n\n\n\n\n\n\n\n")
+        cv2.fillPoly(image, pts =[cnts[0]], color= img_array)
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
