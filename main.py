@@ -407,15 +407,12 @@ def change_image2(event):
         # cv2.fillPoly(image, pts =[cnts[0]], color= bgr_color)
         
 
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) #色配置の変換 BGR→RGB
- 
-        img_array = np.asarray(image) #numpyで扱える配列をつくる
-        img_array[:,:, (0,1)]=0
+        
 
         # bgr = hsv2rgb(0.5,0.5,0.5)
         # print(bgr)
         # print("\n\n\n\n\n\n\n\n\n")
-        cv2.fillPoly(image, pts =[cnts[0]], color= img_array)
+        cv2.fillPoly(image, pts =[cnts[0]], color= (0.2, 0.4, 0.4))
         #green = np.uint8([[[0,255,0 ]]])
         #hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)
         #image[:] = hsv_green
