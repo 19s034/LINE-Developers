@@ -391,6 +391,7 @@ def change_image2(event):
         lower_color = np.array([0, 0, 0])
         upper_color = np.array([255, 255, 255])
 
+
         # 指定した色に基づいたマスク画像の生成
         mask = cv2.inRange(hsv, lower_color, upper_color)
         output = cv2.bitwise_and(hsv, hsv, mask = mask)
