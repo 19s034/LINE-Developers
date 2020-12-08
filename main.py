@@ -175,7 +175,7 @@ def handle_send_message2(event,relpy):
 #画像送信処理
 def handle_send_message3(event,relpy):
     #mozaiku(event)
-    result = change_image2(event)
+    result = change_image3(event)
     reply = str(relpy)
 
     if result:
