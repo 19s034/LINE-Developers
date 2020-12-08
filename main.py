@@ -335,6 +335,41 @@ def is_bold(pnt, hair_mask):
 #def hsv2rgb(h,s,v):
 #    return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
+def change_image3(event):
+    image_file = event + ".jpg"
+    save_file = event + "_face.jpg"
+    #save_file2 = event.message.id + "_face2.jpg"
+    print("イメージファイル: {} // {}".format(image_file, save_file))
+    image_path = "static/" + image_file
+    print("イメージパス: {}".format(image_path))
+    output_path = "static/" + save_file
+    #output_path2 = "static/" + save_file2
+    print("アウトプットパス: {}".format(output_path))
+
+    image = cv2.imread(image_path)     # Load image
+
+     # Convert BGR to HSV
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # define range of blue color in HSV
+    lower_blue = np.array([0,0,0])
+    upper_blue = np.array([0,0,50])
+
+    # Threshold the HSV image to get only blue colors
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    # Bitwise-AND mask and original image
+    res = cv2.bitwise_and(frame,frame, mask= mask)
+
+
+    if bool:
+        # 認識結果の保存
+        cv2.imwrite(output_path, image)
+        #cv2.imwrite(output_path2, image)
+        return True
+    else:
+        return False
+
 def change_image2(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
