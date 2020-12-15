@@ -177,19 +177,20 @@ def handle_send_message2(event,relpy):
 #画像送信処理
 def handle_send_message3(event,relpy):
     #mozaiku(event)
-    result = change_image3(event)
+    change_image3(event)
     reply = str(relpy)
 
-    if result:
-        line_bot_api.reply_message(
+    line_bot_api.reply_message(
             reply, ImageSendMessage(
                 original_content_url=FQDN + "/static/" + event + "_face.jpg",
                 preview_image_url=FQDN + "/static/" + event + "_face.jpg",
             )
         )
+    # if result:
+        
 
-    else:
-        handle_textmessage(event)
+    # else:
+    #     handle_textmessage(event)
 
 #囲う処理
 def change_image(event):
@@ -347,13 +348,15 @@ def change_image3(event):
         hsv_mask = cv2.inRange(hsv_image, HSV_MIN, HSV_MAX)
 
 
-    if bool:
-        # 認識結果の保存
-        cv2.imwrite(output_path, hsv_mask)
-        #cv2.imwrite(output_path2, image)
-        return True
-    else:
-        return False
+
+    cv2.imwrite(output_path, hsv_mask)
+    # if bool:
+    #     # 認識結果の保存
+    #     cv2.imwrite(output_path, hsv_mask)
+    #     #cv2.imwrite(output_path2, image)
+    #     return True
+    # else:
+    #     return False
 
 
 
