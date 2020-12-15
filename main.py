@@ -136,6 +136,8 @@ def handle_image_message(event):
     
     flex(event)
 
+
+
     
 
     
@@ -310,32 +312,6 @@ def is_bold(pnt, hair_mask):
         print("Not Bold")
         return False
 
-#def hsv_to_rgb(h,s,v):
-##    h = 0 ~ 360
-##    s = 0 ~ 255
-##    v = 0 ~ 255
-#    i = int(h / 60.0)
-#    mx = v
-#    mn = v - ((s / 255.0) * v)
-#    if h is None:
-#        return(0,0,0)
-#    if i == 0:
-#        (r1,g1,b1) = (mx,(h/60.0)*(mx-mn)+mn,mn)
-#    elif i == 1:
-#        (r1,g1,b1) = (((120.0-h)/60.0)*(mx-mn)+mn,mx,mn)
-#    elif i == 2:
-#        (r1,g1,b1) = (mn,mx,((h-120.0)/60.0)*(mx-mn)+mn)
-#    elif i == 3:
-#        (r1,g1,b1) = (mn,((240.0-h)/60.0)*(mx-mn)+mn,mx)
-#    elif i == 4:
-#        (r1,g1,b1) = (((h-240.0)/60.0)*(mx-mn)+mn,mn,mx)
-#    elif 5 <= i:
-#        (r1,g1,b1) = (mx,mn,((360.0-h)/60.0)*(mx-mn)+mn)
-#    return (int(r1), int(g1), int(b1))
-
-#def hsv2rgb(h,s,v):
-#    return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
-
 def change_image3(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
@@ -349,27 +325,38 @@ def change_image3(event):
 
     image = cv2.imread(image_path)     # Load image
 
-     # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    HSV_MIN = np.array([0, 30, 60])
+    HSV_MAX = np.array([20, 150, 255])
 
-    # define range of blue color in HSV
-    lower_blue = np.array([0,0,0])
-    upper_blue = np.array([0,0,50])
+   
 
-    # Threshold the HSV image to get only blue colors
-    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+    # 初期背景を設定するため画像取得
+    
+    background = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(frame,frame, mask= mask)
+    while True:
+       
+
+        # 背景画像との差分を取る
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        diff = cv2.absdiff(gray, background)
+
+        # 肌色検出がしやすいようにBGRからHSVに変換
+        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+        hsv_mask = cv2.inRange(hsv_image, HSV_MIN, HSV_MAX)
 
 
     if bool:
         # 認識結果の保存
-        cv2.imwrite(output_path, image)
+        cv2.imwrite(output_path, hsv_mask)
         #cv2.imwrite(output_path2, image)
         return True
     else:
         return False
+
+
+
 
 def change_image2(event):
     image_file = event + ".jpg"
