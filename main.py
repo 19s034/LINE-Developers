@@ -366,7 +366,7 @@ def change_image3(event):
     
     white = [255, 255, 255]
     green = [156,100,71]
-    image[mask_hsv>0]=(156,100,71)
+    image[mask_hsv>0]=(0,255,0)
     
     cv2.imwrite(output_path, image)
 
