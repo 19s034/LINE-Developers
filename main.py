@@ -326,39 +326,33 @@ def change_image3(event):
 
     image = cv2.imread(image_path)     # Load image
 
-    HSV_MIN = np.array([0, 30, 60])
-    HSV_MAX = np.array([20, 150, 255])
+    h_th_low = 0 
+    h_th_up = 30
+    s_th = 100
+    v_th = 200
 
-   
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
 
-    # 初期背景を設定するため画像取得
-    
-    background = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    if h_th_low > h_th_up:
+        ret, h_dst_1 = cv2.threshold(h, h_th_low, 255, cv2.THRESH_BINARY) 
+        ret, h_dst_2 = cv2.threshold(h, h_th_up,  255, cv2.THRESH_BINARY_INV)
+        
+        dst = cv2.bitwise_or(h_dst_1, h_dst_2)
 
-    while True:
-       
+    else:
+        ret, dst = cv2.threshold(h,   h_th_low, 255, cv2.THRESH_TOZERO) 
+        ret, dst = cv2.threshold(dst, h_th_up,  255, cv2.THRESH_TOZERO_INV)
 
-        # 背景画像との差分を取る
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        diff = cv2.absdiff(gray, background)
+        ret, dst = cv2.threshold(dst, 0, 255, cv2.THRESH_BINARY)
+        
+    ret, s_dst = cv2.threshold(s, s_th, 255, cv2.THRESH_BINARY)
+    ret, v_dst = cv2.threshold(v, v_th, 255, cv2.THRESH_BINARY)
 
-        # 肌色検出がしやすいようにBGRからHSVに変換
-        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    dst = cv2.bitwise_and(dst, s_dst)
+    dst = cv2.bitwise_and(dst, v_dst)
 
-        hsv_mask = cv2.inRange(hsv_image, HSV_MIN, HSV_MAX)
-
-
-
-    cv2.imwrite(output_path, hsv_mask)
-    # if bool:
-    #     # 認識結果の保存
-    #     cv2.imwrite(output_path, hsv_mask)
-    #     #cv2.imwrite(output_path2, image)
-    #     return True
-    # else:
-    #     return False
-
-
+    cv2.imwrite(output_path, dst)
 
 
 def change_image2(event):
