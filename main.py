@@ -326,33 +326,45 @@ def change_image3(event):
 
     image = cv2.imread(image_path)     # Load image
 
-    h_th_low = 0 
-    h_th_up = 30
-    s_th = 30
-    v_th = 150
+    # h_th_low = 0 
+    # h_th_up = 30
+    # s_th = 30
+    # v_th = 150
 
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    h, s, v = cv2.split(hsv)
+    # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    # h, s, v = cv2.split(hsv)
 
-    if h_th_low > h_th_up:
-        ret, h_dst_1 = cv2.threshold(h, h_th_low, 255, cv2.THRESH_BINARY) 
-        ret, h_dst_2 = cv2.threshold(h, h_th_up,  255, cv2.THRESH_BINARY_INV)
+    # if h_th_low > h_th_up:
+    #     ret, h_dst_1 = cv2.threshold(h, h_th_low, 255, cv2.THRESH_BINARY) 
+    #     ret, h_dst_2 = cv2.threshold(h, h_th_up,  255, cv2.THRESH_BINARY_INV)
         
-        dst = cv2.bitwise_or(h_dst_1, h_dst_2)
+    #     dst = cv2.bitwise_or(h_dst_1, h_dst_2)
 
-    else:
-        ret, dst = cv2.threshold(h,   h_th_low, 255, cv2.THRESH_TOZERO) 
-        ret, dst = cv2.threshold(dst, h_th_up,  255, cv2.THRESH_TOZERO_INV)
+    # else:
+    #     ret, dst = cv2.threshold(h,   h_th_low, 255, cv2.THRESH_TOZERO) 
+    #     ret, dst = cv2.threshold(dst, h_th_up,  255, cv2.THRESH_TOZERO_INV)
 
-        ret, dst = cv2.threshold(dst, 0, 255, cv2.THRESH_BINARY)
+    #     ret, dst = cv2.threshold(dst, 0, 255, cv2.THRESH_BINARY)
         
-    ret, s_dst = cv2.threshold(s, s_th, 255, cv2.THRESH_BINARY)
-    ret, v_dst = cv2.threshold(v, v_th, 255, cv2.THRESH_BINARY)
+    # ret, s_dst = cv2.threshold(s, s_th, 255, cv2.THRESH_BINARY)
+    # ret, v_dst = cv2.threshold(v, v_th, 255, cv2.THRESH_BINARY)
 
-    dst = cv2.bitwise_and(dst, s_dst)
-    dst = cv2.bitwise_and(dst, v_dst)
+    # dst = cv2.bitwise_and(dst, s_dst)
+    # dst = cv2.bitwise_and(dst, v_dst)
 
-    cv2.imwrite(output_path, dst)
+    HSV_MIN = np.array([0, 30, 60])
+    HSV_MAX = np.array([20, 150, 255])
+ 
+    
+ 
+    #convert hsv
+    img_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+ 
+    #mask hsv region
+    mask_hsv = cv2.inRange(img_hsv, HSV_MIN, HSV_MAX)
+ 
+    
+    cv2.imwrite(output_path, mask_hsv)
 
 
 def change_image2(event):
