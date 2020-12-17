@@ -366,9 +366,9 @@ def change_image3(event):
     
     white = [255, 255, 255]
     green = [156,100,71]
-    mask_hsv[np.where((mask_hsv == white).all(axis=2))] = green
+    image[mask_hsv>0]=(156,100,71)
     
-    cv2.imwrite(output_path, mask_hsv)
+    cv2.imwrite(output_path, image)
 
 
 def change_image2(event):
