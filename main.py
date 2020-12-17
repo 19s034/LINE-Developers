@@ -328,8 +328,8 @@ def change_image3(event):
 
     h_th_low = 0 
     h_th_up = 30
-    s_th = 100
-    v_th = 200
+    s_th = 30
+    v_th = 150
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
