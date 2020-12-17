@@ -352,7 +352,7 @@ def change_image3(event):
     # dst = cv2.bitwise_and(dst, s_dst)
     # dst = cv2.bitwise_and(dst, v_dst)
 
-    HSV_MIN = np.array([0, 30, 60])
+    HSV_MIN = np.array([0, 30, 20])
     HSV_MAX = np.array([30, 150, 255])
  
     
@@ -366,7 +366,7 @@ def change_image3(event):
     
     white = [255, 255, 255]
     green = [156,100,71]
-    image[mask_hsv>0]=(102,85,62)
+    image[mask_hsv>0]=(40,100,0)
     
     cv2.imwrite(output_path, image)
 
