@@ -365,7 +365,7 @@ def change_image3(event):
     
     
     img_bgr =cv2.cvtColor(mask_hsv, cv2.COLOR_HSV2BGR)
-    image[img_bgr>0]=(65,155,50,0.8)
+    image[img_bgr>0]=(65,155,50)
     
     cv2.imwrite(output_path, image)
 
