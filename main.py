@@ -354,24 +354,27 @@ def change_image3(event):
 
     HSV_MIN = np.array([0, 30, 30])
     HSV_MAX = np.array([30, 150, 255])
- 
-    
+
  
     #convert hsv
     img_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
  
     #mask hsv region
     mask_hsv = cv2.inRange(img_hsv, HSV_MIN, HSV_MAX)
+
+    hsv_2 = np.copy(mask_hsv)
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
     
         
     
-    white = [255, 255, 255]
-    green = [156,100,71]
-    image[mask_hsv>0]=(130,190,70)
+    # white = [255, 255, 255]
+    # green = [156,100,71]
+    # image[mask_hsv>0]=(130,190,70)
     
     # img_bgr =cv2.cvtColor(mask_hsv, cv2.COLOR_HSV2BGR)
     # image[img_bgr>0]=(65,155,50,0.8)
-    cv2.imwrite(output_path, image)
+    bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+    cv2.imwrite(output_path, bgr)
 
 
 def change_image2(event):
