@@ -363,7 +363,7 @@ def change_image3(event):
     mask_hsv = cv2.inRange(img_hsv, HSV_MIN, HSV_MAX)
 
     hsv_2 = np.copy(mask_hsv)
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (mask_hsv[:, :, 0]<25) ,mask_hsv[:, :,(2)]*0.2,mask_hsv[:, :, 0])
     
         
     
