@@ -408,6 +408,7 @@ def change_image2(event):
     i1 = cv2.bitwise_and(image, image, mask=mask)
 
 
+
     # 髪の毛なし
     if is_bold(topmost,mask):
         cv2.rectangle(image,topmost,topmost,(0,0,255),5)
