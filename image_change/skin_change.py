@@ -11,16 +11,9 @@ import numpy as np
 import path_data
 
 
-def skin_image(event):
-    image_file = event + ".jpg"
-    save_file = event + "_face.jpg"
-    #save_file2 = event.message.id + "_face2.jpg"
-    #print("イメージファイル: {} // {}".format(image_file, save_file))
-    image_path = "static/" + image_file
-    #print("イメージパス: {}".format(image_path))
-    output_path = "static/" + save_file
-    #output_path2 = "static/" + save_file2
-    #print("アウトプットパス: {}".format(output_path))
+def skin_image(event,userid):
+    image_path, output_path = path_data.get_image_path(event,userid)
+  
  
     image = cv2.imread(image_path)     # Load image
  
