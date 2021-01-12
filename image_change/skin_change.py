@@ -11,7 +11,7 @@ import numpy as np
 import path_data
 
 
-def skin_change(event):
+def skin_image(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
     #save_file2 = event.message.id + "_face2.jpg"
