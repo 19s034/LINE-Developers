@@ -317,12 +317,12 @@ def change_image3(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
     #save_file2 = event.message.id + "_face2.jpg"
-    print("イメージファイル: {} // {}".format(image_file, save_file))
+    #print("イメージファイル: {} // {}".format(image_file, save_file))
     image_path = "static/" + image_file
-    print("イメージパス: {}".format(image_path))
+    #print("イメージパス: {}".format(image_path))
     output_path = "static/" + save_file
     #output_path2 = "static/" + save_file2
-    print("アウトプットパス: {}".format(output_path))
+    #print("アウトプットパス: {}".format(output_path))
 
     image = cv2.imread(image_path)     # Load image
 
@@ -370,7 +370,7 @@ def change_image3(event):
     img2 = cv2.resize(image , (int(width*0.5), int(height*0.5)))
     hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>4) & (hsv[:, :, 0]<30) ,hsv[:, :,(2)]*0.3,hsv[:, :, 0])
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>4) & (hsv[:, :, 0]<30) ,hsv[:, :,(3)]*0.3,hsv[:, :, 0])
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     
     
