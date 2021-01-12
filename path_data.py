@@ -11,6 +11,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def get_image_path(event,userid):
 
     image_file = event + ".jpg"
