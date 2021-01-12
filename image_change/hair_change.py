@@ -12,6 +12,7 @@ import numpy as np
 import path_data
 
 
+
 def hair_image(event,userid):
     image_path, output_path = path_data.get_image_path(event,userid)
 

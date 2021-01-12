@@ -100,6 +100,7 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message5(work,event.reply_token,userId)
 
+
     #肌の色
     elif event.message.text == ">>test" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))

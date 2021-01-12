@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import path_data
 
+
 def skin_change(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
