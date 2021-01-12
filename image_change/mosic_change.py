@@ -12,42 +12,60 @@ import path_data
 
 
 ################################################################
-###-------------------------イラスト--------------------------###
+###-------------------------モザイク--------------------------###
 
-def illust_filter(img, K=20):
-
-    # グレースケール変換
-    gray = cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY)
-
-    # ぼかしでノイズ低減
-    edge = cv2.blur(gray, (3, 3))
-
-    # Cannyアルゴリズムで輪郭抽出
-    edge = cv2.Canny(edge, 50, 150, apertureSize=3)
-
-    # 輪郭画像をRGB色空間に変換
-    edge = cv2.cvtColor(edge, cv2.COLOR_GRAY2BGR)
-
-    # 画像の減色処理
-    img = np.array(img/K, dtype=np.uint8)
-    img = np.array(img*K, dtype=np.uint8)
-
-    # 差分を返す
-    return cv2.subtract(img, edge)
-
-
-
-def illust_image(event,userid):
-    
+def mosic_image(event,userid):
+    bool = True
     image_path, output_path = path_data.get_image_path(event,userid)
 
-    # 元画像の読み込み
-    img = cv2.imread(image_path)
+    # ファイル読み込みo
+    image = cv2.imread(image_path)
 
-    # 画像のアニメ絵化
-    image = illust_filter(img, 30)
+    # グレースケール変換
+    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    # 結果出力
-    cv2.imwrite(output_path, image)
+    # カスケード分類器の特徴量を取得する
+    cascade = cv2.CascadeClassifier(main.cascade_path)
+    cascade_eye = cv2.CascadeClassifier(main.cascade_eye_path)
+    # 物体認識（顔認識）の実行
+    # image – CV_8U 型の行列．ここに格納されている画像中から物体が検出されます
+    # objects – 矩形を要素とするベクトル．それぞれの矩形は，検出した物体を含みます
+    # scaleFactor – 各画像スケールにおける縮小量を表します
+    # minNeighbors – 物体候補となる矩形は，最低でもこの数だけの近傍矩形を含む必要があります
+    # flags – このパラメータは，新しいカスケードでは利用されません．古いカスケードに対しては，cvHaarDetectObjects 関数の場合と同じ意味を持ちます
+    # minSize – 物体が取り得る最小サイズ．これよりも小さい物体は無視されます
+    facerect = cascade.detectMultiScale(image_gray, scaleFactor=1.1, minNeighbors=2, minSize=(30, 30))
+    eyerect = cascade_eye.detectMultiScale(image_gray, scaleFactor=1.1, minNeighbors=2, minSize=(20, 20))
+    print("レクト:{} // {}".format(facerect, eyerect))
+    print("ぎっとぽっど")
+
+    color = (255, 0, 0)  # 青
+
+    ratio = 0.05  # 縮小処理時の縮小率(小さいほどモザイクが大きくなる)
+
+    print("通過したじょ")
+    if len(eyerect) > 0:
+        # for rect in eyerect:
+        #     cv2.rectangle(image, tuple(rect[0:2]), tuple(rect[0:2] + rect[2:4]), color, thickness=1)
+        #     print(eyerect)
+        #     print(rect)
+           
+
+        for x, y, w, h in eyerect:  # 引数でeyesで取得した数分forループ
+           # y:はHEIGHT、x:はWEIGHT  fxはxの縮小率、fyはyの縮小率
+           small = cv2.resize(image[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+           image[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
+           
+    else:
+        bool = False
+
+    if bool:
+        # 認識結果の保存
+        cv2.imwrite(output_path, image)
+        #cv2.imwrite(output_path2, image)
+        return True
+    else:
+        return False
+
 
 ################################################################

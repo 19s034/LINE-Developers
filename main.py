@@ -102,7 +102,7 @@ def handle_message(event):
 
 
     #肌の色
-    elif event.message.text == ">>test" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>肌変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
