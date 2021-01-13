@@ -19,7 +19,7 @@ def skin_image(event,userid):
     
     min = 5
     max = 20
-    diff = 60
+    diff = 100
     
     image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     hsv = np.copy(image_hsv)
