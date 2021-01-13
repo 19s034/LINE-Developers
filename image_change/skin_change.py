@@ -18,7 +18,7 @@ def skin_image(event,userid):
     image = cv2.imread(image_path)     # Load image
  
     max = 20
-    diff = 10
+    diff = -30
     
     image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     hsv = np.copy(image_hsv)
