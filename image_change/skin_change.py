@@ -23,7 +23,8 @@ def skin_image(event,userid):
     ang = int(1*(180//16))
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
     hsv = hsv.astype(np.uint16) # uint8だと255以上で不定になるので型を変更
-    hsv[:,:,0] = (hsv[:,:,0]+ang)%180
+    hsv = np.copy(image_hsv)
+    hsv[:,:,0] = ((hsv[:, :, 0]>4) & (hsv[:, :, 0]<30),(hsv[:,:,0]+ang)%180,hsv[:, :, 0])
     hsv = hsv.astype(np.uint8) # 型を戻す
 
     # image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
