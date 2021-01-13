@@ -23,7 +23,7 @@ def skin_image(event,userid):
     image_hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     hsv = np.copy(image_hsv)
     #hsv[:, :, 0] = np.where(image_hsv[:, :, 0] < max, image_hsv[:, :, 0] + diff, image_hsv[:, :, 0])
-    hsv[:, :, 0] = np.where(image_hsv[:, :, 0]>4) & (image_hsv[:, :, 0]<30), image_hsv[:, :, 0] + diff, image_hsv[:, :, 0])
+    hsv[:, :, 0] = np.where((image_hsv[:, :, 0]>4) & (image_hsv[:, :, 0]<30), image_hsv[:, :, 0] + diff, image_hsv[:, :, 0])
     # height = image.shape[0]
     # width = image.shape[1]
     # img2 = cv2.resize(image , (int(width*0.5), int(height*0.5)))
