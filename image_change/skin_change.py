@@ -19,12 +19,9 @@ def skin_image(event,userid):
  
 
  
-    height = image.shape[0]
-    width = image.shape[1]
-    img2 = cv2.resize(image , (int(width*0.5), int(height*0.5)))
-    hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>20) & (hsv[:, :, 0]<35) ,hsv[:, :, 0] + 80,hsv[:, :, 0])
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>10) & (hsv[:, :, 0]<35) ,hsv[:, :, 0] + 80,hsv[:, :, 0])
     #0.001 赤
     #0.3 緑
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
