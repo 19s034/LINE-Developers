@@ -36,7 +36,7 @@ def skin_image(event,userid):
     #    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤色
     #elif a == 6:
     hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.3,hsv[:, :, 2]) #黒色
-    hsv_2[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.3,hsv_2[:, :, 2]) #黒色
+    hsv_2[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.7,hsv_2[:, :, 2]) #黒色
     #0.001 赤
     #0.3 緑
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
