@@ -108,61 +108,7 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        carousel_skin(event)
-
-    elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 1
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
-    
-    elif event.message.text == ">>青色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 2
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
-
-    elif event.message.text == ">>黄色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 3
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
-
-    elif event.message.text == ">>ピンク変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 4
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
-
-    elif event.message.text == ">>赤色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 5
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
-
-    elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        color_select = 6
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId,color_select)
+        output_method.handle_send_message6(work,event.reply_token,userId)
 
     
 def text_save_id(work):
