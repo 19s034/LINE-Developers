@@ -112,7 +112,7 @@ def handle_message(event):
 
     elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
-        color = 0
+        color = 1
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
