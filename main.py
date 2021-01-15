@@ -108,7 +108,61 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        carousel_skin(event)
+
+    elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 0
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>青色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 2
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>黄色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 3
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>ピンク変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 4
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>赤色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 5
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        color = 6
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
     
 def text_save_id(work):
@@ -137,6 +191,28 @@ def carousel(event):
     json_data = json.load(json_open)
 
     message.append(TextSendMessage(text = "メニューを選択してね"))
+    message.append(FlexSendMessage(alt_text="test", contents=json_data))
+
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    line_bot_api.reply_message(event.reply_token, message)   
+
+def carousel_skin(event):
+    message = []
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
+
+    # Json展開
+    json_open = open('carousel_skin.json', 'r')
+    json_data = json.load(json_open)
+
+    message.append(TextSendMessage(text = "変更したい色を選択してね"))
     message.append(FlexSendMessage(alt_text="test", contents=json_data))
 
     if event.reply_token == "00000000000000000000000000000000":
