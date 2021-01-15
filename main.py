@@ -49,19 +49,7 @@ def flex(event):
     json_open = open('test.json', 'r')
     json_data = json.load(json_open)
     user_id = os.environ["USER_ID"]
-    #print("json_data: {}".format(json_data.get("hero").get("url")))
-    #print(json_data.get("hero").get("url"))
-    #json_data["hero"]
-    #message = line_bot_api.reply_message(
-    #    event.reply_token,
-    #    [
-    #        FlexSendMessage(
-    #        alt_text="flex",
-    #        contents=BubbleContainer.new_from_json_dict(json_data)
-    #        )
-    #    ]
-    #)
-
+    
     messages = FlexSendMessage(alt_text="test", contents=json_data)
     print("フレックスメッセージ中身: {}".format(messages))
     if event.reply_token == "00000000000000000000000000000000":
@@ -69,7 +57,7 @@ def flex(event):
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
         
-    line_bot_api.push_message(user_id, messages=messages)
+    line_bot_api.reply_message(event.reply_token, message)
 
     # message = []
     # work = event.message.id
