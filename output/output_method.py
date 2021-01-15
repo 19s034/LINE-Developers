@@ -98,8 +98,8 @@ def handle_send_message5(event,reply,userid):
 
 
 # # 肌の色変更
-def handle_send_message6(event,reply,userid):
-    result = skin_change.skin_image(event,userid)
+def handle_send_message6(event,reply,userid,color):
+    result = skin_change.skin_image(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []

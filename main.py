@@ -108,7 +108,61 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
+        #output_method.handle_send_message6(work,event.reply_token,userId)
+
+        flex(event)
+
+    elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+
+        color = 1
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>青色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
         output_method.handle_send_message6(work,event.reply_token,userId)
+
+    elif event.message.text == ">>黄色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId)
+
+    elif event.message.text == ">>ピンク変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId)
+
+    elif event.message.text == ">>赤色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId)
+
+    elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId)
+
+  
 
     
 def text_save_id(work):
@@ -145,6 +199,25 @@ def carousel(event):
         return
     
     line_bot_api.reply_message(event.reply_token, message)   
+
+def flex(event):
+    message = []
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
+
+    # Json展開
+    json_open = open('test.json', 'r')
+    json_data = json.load(json_open)
+
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    line_bot_api.reply_message(event.reply_token, message) 
 
 def carousel_skin(event):
     message = []
