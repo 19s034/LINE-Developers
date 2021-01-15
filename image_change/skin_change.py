@@ -12,7 +12,7 @@ import path_data
 import random
 
 
-def skin_image(event,userid,color):
+def skin_image(event,userid,color_select):
     image_path, output_path = path_data.get_image_path(event,userid)
   
  
@@ -22,19 +22,19 @@ def skin_image(event,userid,color):
  
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
-    print("カラー" + str(color))
+    print("カラー" + str(color_select))
     #a = random.randint(1,5)
-    if color == 1:
+    if color_select == 1:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
-    elif color == 2:
+    elif color_select == 2:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 100,hsv[:, :, 0]) #青
-    elif color == 3:
+    elif color_select == 3:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 15,hsv[:, :, 0]) #黄色
-    elif color == 4:
+    elif color_select == 4:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 140,hsv[:, :, 0]) #ピンク
-    elif color == 5:
+    elif color_select == 5:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤色
-    elif color == 6:
+    elif color_select == 6:
         hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.4,hsv[:, :, 2]) #黒色
     #hsv_2[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.7,hsv_2[:, :, 2]) #黒色
     #0.001 赤
