@@ -103,11 +103,11 @@ def handle_message(event):
 
     #肌の色
     elif event.message.text == ">>肌変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
+        # print("通過: {}".format(event.message.text))
+        # with open(path_w1) as f:
+        #     work = f.read()
+        # with open(path_w2) as f2:
+        #     work1 = f2.read()
         carousel_skin(event)
 
     elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
