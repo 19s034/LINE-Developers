@@ -41,6 +41,7 @@ def callback():
     return "OK"
 
 def flex(event):
+    message = []
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
