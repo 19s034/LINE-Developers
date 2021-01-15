@@ -40,6 +40,26 @@ def callback():
         abort(400)
     return "OK"
 
+def flex(event):
+    message = []
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
+
+    # Json展開
+    json_open = open('test.json', 'r')
+    json_data = json.load(json_open)
+
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    line_bot_api.reply_message(event.reply_token, message) 
+
+
 # テキストデータを受け取ったときに走るやつ。
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -200,24 +220,6 @@ def carousel(event):
     
     line_bot_api.reply_message(event.reply_token, message)   
 
-def flex(event):
-    message = []
-    work = event.message.id
-    reply_work = event.reply_token
-    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    text_save_id(work)
-    text_save_reply(reply_work)
-
-    # Json展開
-    json_open = open('test.json', 'r')
-    json_data = json.load(json_open)
-
-    if event.reply_token == "00000000000000000000000000000000":
-        return
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
-        return
-    
-    line_bot_api.reply_message(event.reply_token, message) 
 
 def carousel_skin(event):
     message = []
