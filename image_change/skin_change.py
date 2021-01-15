@@ -22,7 +22,7 @@ def skin_image(event,userid,color):
  
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
-
+    print("カラー" + str(color))
     #a = random.randint(1,5)
     if color == 1:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
