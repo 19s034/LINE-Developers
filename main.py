@@ -41,7 +41,7 @@ def callback():
     return "OK"
 
 def flex(event):
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    
     message = []
     work = event.message.id
     reply_work = event.reply_token
@@ -51,8 +51,9 @@ def flex(event):
 
     # Json展開
     json_open = open('test.json', 'r')
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     json_data = json.load(json_open)
-
+    print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
     if event.reply_token == "00000000000000000000000000000000":
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
