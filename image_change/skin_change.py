@@ -26,6 +26,7 @@ def skin_image(event,userid,color):
     #a = random.randint(1,6)
 
 
+
     if color == 1:
        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
     elif color == 2:
