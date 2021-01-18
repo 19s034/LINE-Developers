@@ -40,28 +40,6 @@ def callback():
         abort(400)
     return "OK"
 
-def flex(event):
-    message = []
-    work = event.message.id
-    reply_work = event.reply_token
-    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    text_save_id(work)
-    text_save_reply(reply_work)
-
-    # Json展開
-    json_open = open('test.json', 'r')
-    json_data = json.load(json_open)
-
-    message.append(TextSendMessage(text = "メニューを選択してね"))
-    message.append(FlexSendMessage(alt_text="test", contents=json_data))
-
-    if event.reply_token == "00000000000000000000000000000000":
-        return
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
-        return
-    
-    line_bot_api.reply_message(event.reply_token, messages)   
-
 
 # テキストデータを受け取ったときに走るやつ。
 @handler.add(MessageEvent, message=TextMessage)
@@ -132,6 +110,7 @@ def handle_message(event):
         # with open(path_w2) as f2:
         #     work1 = f2.read()
         # output_method.handle_send_message6(work,event.reply_token,userId)
+
         flex(event)
 
     elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
@@ -244,6 +223,28 @@ def carousel_skin(event):
         return
     
     line_bot_api.reply_message(event.reply_token, message)   
+
+def flex(event):
+    message = []
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
+    json_open = open('test.json', 'r')
+    json_data = json.load(json_open)
+    user_id = os.environ["USER_ID"]
+    
+
+    messages = FlexSendMessage(alt_text="test", contents=json_data)
+    print("フレックスメッセージ中身: {}".format(messages))
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+        
+    line_bot_api.reply_message(event.reply_token, messages)
+
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
