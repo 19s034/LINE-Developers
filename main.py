@@ -16,6 +16,7 @@ path_w1 = 'saveid.txt'
 path_w2 = 'savereply.txt'
 app = Flask(__name__)
 
+
 # トークン情報もろもろ
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ['YOUR_CHANNEL_ACCESS_TOKEN']
 YOUR_CHANNEL_SECRET = os.environ['YOUR_CHANNEL_SECRET']
