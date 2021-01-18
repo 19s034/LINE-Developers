@@ -10,6 +10,7 @@ import imutils
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # リプライIDとイベントIDをテキストとして保存するためのやつ
 work = {}
 path_w1 = 'saveid.txt'
