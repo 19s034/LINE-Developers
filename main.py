@@ -223,6 +223,7 @@ def text_save_id(work):
     with open(path_w1, mode='w') as f:
         f.write(s)
 
+
 def text_save_reply(work):
     s = work
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD_text_saveReply:{}".format(work))
