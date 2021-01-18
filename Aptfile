@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 libsm6
 libxrender1
 libfontconfig1
-=======
-libsm6
-libxrender1
-libfontconfig1
->>>>>>> 505ac87739fbe0613373db9c34f14c18fa88856c
 libice6
