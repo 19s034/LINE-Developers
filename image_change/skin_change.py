@@ -17,10 +17,12 @@ def skin_image(event,userid,color):
   
  
     image = cv2.imread(image_path)     # Load image
- 
 
- 
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR->HSV変換
+    height = img.shape[0]
+    width = img.shape[1]
+    img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
+
+    hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
 
     #a = random.randint(1,6)
