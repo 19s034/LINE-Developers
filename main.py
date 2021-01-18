@@ -55,6 +55,7 @@ def handle_message(event):
     userId = profile.user_id
 
 
+
     #モザイク(目)
     if event.message.text == ">>おめめモザイク" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
