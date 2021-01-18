@@ -51,6 +51,7 @@ def flex(event):
     json_data = json.load(json_open)
     user_id = os.environ["USER_ID"]
     
+    
     messages = FlexSendMessage(alt_text="test", contents=json_data)
     print("フレックスメッセージ中身: {}".format(messages))
     if event.reply_token == "00000000000000000000000000000000":
