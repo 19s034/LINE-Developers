@@ -59,7 +59,7 @@ def flex(event):
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
         
-    line_bot_api.reply_message(event.reply_token, message)
+    line_bot_api.reply_message(event.reply_token, messages)
 
     # message = []
     # work = event.message.id
