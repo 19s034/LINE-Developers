@@ -174,6 +174,7 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message6(work,event.reply_token,userId,color)
 
+
     elif event.message.text == ">>赤色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
 
