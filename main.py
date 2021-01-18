@@ -47,36 +47,20 @@ def flex(event):
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     text_save_id(work)
     text_save_reply(reply_work)
+
+    # Json展開
     json_open = open('test.json', 'r')
     json_data = json.load(json_open)
-    user_id = os.environ["USER_ID"]
-    
 
-    messages = FlexSendMessage(alt_text="test", contents=json_data)
-    print("フレックスメッセージ中身: {}".format(messages))
+    message.append(TextSendMessage(text = "メニューを選択してね"))
+    message.append(FlexSendMessage(alt_text="test", contents=json_data))
+
     if event.reply_token == "00000000000000000000000000000000":
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
-        
-    line_bot_api.reply_message(event.reply_token, messages)
-
-    # message = []
-    # work = event.message.id
-    # reply_work = event.reply_token
-    # print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    # text_save_id(work)
-    # text_save_reply(reply_work)
-
-    # # Json展開
-    # json_open = open('test.json', 'r')
-    # json_data = json.load(json_open)
-    # if event.reply_token == "00000000000000000000000000000000":
-    #     return
-    # if event.reply_token == "ffffffffffffffffffffffffffffffff":
-    #     return
     
-    # line_bot_api.reply_message(event.reply_token, message) 
+    line_bot_api.reply_message(event.reply_token, messages)   
 
 
 # テキストデータを受け取ったときに走るやつ。
