@@ -31,15 +31,15 @@ def skin_image(event,userid,color):
     elif color == 2:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤に変更
         hsv_3 = np.copy(hsv_2)
-        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 0] + 110,hsv_2[:, :, 0]) #青
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>= 0) & (hsv_2[:, :, 0]<10) ,hsv_2[:, :, 0] + 110,hsv_2[:, :, 0]) #青
         bgr = cv2.cvtColor(hsv_3, cv2.COLOR_HSV2BGR)
     elif color == 3:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤に変更
         hsv_3 = np.copy(hsv_2)
-        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 0] + 25,hsv[:, :, 0]) #黄色
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>= 0) & (hsv_2[:, :, 0]<10) ,hsv_2[:, :, 0] + 25,hsv_2[:, :, 0]) #黄色
         bgr = cv2.cvtColor(hsv_3, cv2.COLOR_HSV2BGR)
     elif color == 4:
-        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0]) #ピンク
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 160,hsv[:, :, 0]) #ピンク
         hsv_3 = np.copy(hsv_2)
         hsv_3[:, :, 1] = np.where((hsv_2[:, :, 0]>140) & (hsv_2[:, :, 0]<180) ,hsv[:, :, 1] *0.8,hsv[:, :, 1]) #ピンク       
         bgr = cv2.cvtColor(hsv_3, cv2.COLOR_HSV2BGR)
@@ -53,8 +53,11 @@ def skin_image(event,userid,color):
         # hsv_4 = np.copy(hsv_3)
         # hsv_4[:, :, 2] = np.where((hsv_3[:, :, 2]>=0) & (hsv_3[:, :, 2]<5) ,hsv_3[:, :, 2] +253,hsv_3[:, :, 2]) #黒色
         # #hsv_4[:, :, 1] = np.where((hsv_3[:, :, 1]>=0) & (hsv_3[:, :, 1]<10) ,hsv_3[:, :, 1] +254,hsv_3[:, :, 1]) #黒色
-        hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.4,hsv[:, :, 2]) #黒色
-        bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+        
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 160,hsv[:, :, 0]) #ピンク
+        hsv_3 = np.copy(hsv_2)
+        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 0]>=0) & (hsv_2[:, :, 0]<5) ,hsv_2[:, :, 2] *0.4,hsv_2[:, :, 2]) #黒色
+        bgr = cv2.cvtColor(hsv_3, cv2.COLOR_HSV2BGR)
         
     #hsv_2[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.7,hsv_2[:, :, 2]) #黒色
     #0.001 赤
