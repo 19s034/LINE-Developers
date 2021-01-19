@@ -24,7 +24,9 @@ def skin_image(event,userid,color):
     #a = random.randint(1,6)
 
     if color == 1:
-        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #緑
+        hsv_3 = np.copy(hsv_2)
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 0] + 60,hsv_2[:, :, 0]) #緑
     elif color == 2:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 100,hsv[:, :, 0]) #青
     elif color == 3:
@@ -32,7 +34,7 @@ def skin_image(event,userid,color):
     elif color == 4:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0]) #ピンク
         hsv_3 = np.copy(hsv_2)
-        hsv_3[:, :, 1] = np.where((hsv_2[:, :, 0]>140) & (hsv_2[:, :, 0]<180) ,hsv[:, :, 1] *0.6,hsv[:, :, 1]) #ピンク       
+        hsv_3[:, :, 1] = np.where((hsv_2[:, :, 0]>140) & (hsv_2[:, :, 0]<180) ,hsv[:, :, 1] *0.7,hsv[:, :, 1]) #ピンク       
     elif color == 5:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤色
     elif color == 6:
