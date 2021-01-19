@@ -56,7 +56,7 @@ def skin_image(event,userid,color):
         
         hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #ピンク
         hsv_3 = np.copy(hsv_2)
-        hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>= 0) & (hsv[:, :, 0]<5) ,hsv[:, :, 0] +23,hsv[:, :, 0]) #ピンク
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 0]>= 0) & (hsv_2[:, :, 0]<5) ,hsv_2[:, :, 0] +23,hsv_2[:, :, 0]) #ピンク
         hsv_4 = np.copy(hsv_3)
         hsv_4[:, :, 2] = np.where((hsv_3[:, :, 0]>= 23) & (hsv_3[:, :, 0]<25) ,hsv_3[:, :, 2] *0.4,hsv_3[:, :, 2]) #黒色
         bgr = cv2.cvtColor(hsv_4, cv2.COLOR_HSV2BGR)
