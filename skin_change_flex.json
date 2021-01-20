@@ -2,7 +2,7 @@
  "type": "bubble",
  "hero": {
  "type": "image",
- "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+ "url": "https://team-hagi-project.herokuapp.com/static/skin_change.png",
  "size": "full",
  "aspectRatio": "20:13",
  "aspectMode": "cover",
