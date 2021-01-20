@@ -8,7 +8,7 @@
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "url": "https://sinrigakulab.com/wp-content/uploads/%E5%A4%A2%E5%8D%A0%E3%81%84-%E3%83%86%E3%82%B9%E3%83%88-1024x776.jpg"
+        "url": "https://secret-lake-56663.herokuapp.com/static/hair_color_change"
       },
       "footer": {
         "type": "box",
@@ -148,7 +148,7 @@
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "url": "https://team-hagi-project.herokuapp.com/static/illustration.jpg"
+        "url": "https://secret-lake-56663.herokuapp.com/static/skin_color_change"
       },
       "footer": {
         "type": "box",
