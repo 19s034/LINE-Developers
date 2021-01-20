@@ -2,7 +2,7 @@
  "type": "bubble",
  "hero": {
  "type": "image",
- "url": "https://team-hagi-project.herokuapp.com/static/skin_color.jpg",
+ "url": "https://secret-lake-56663.herokuapp.com/static/skin_color.jpg",
  "size": "full",
  "aspectRatio": "20:13",
  "aspectMode": "cover",
