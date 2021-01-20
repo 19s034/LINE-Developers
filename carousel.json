@@ -17,7 +17,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "test",
+            "text": "髪色変更",
             "wrap": true,
             "align": "center",
             "position": "relative",
@@ -29,7 +29,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": ">>test"
+              "text": ">>髪色変更"
             },
             "position": "relative"
           }
@@ -157,7 +157,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "肌変更",
+            "text": "肌色変更",
             "wrap": true,
             "align": "center",
             "position": "relative",
@@ -169,7 +169,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": ">>肌変更"
+              "text": ">>肌色変更"
             },
             "position": "relative"
           }

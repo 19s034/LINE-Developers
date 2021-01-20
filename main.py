@@ -93,7 +93,7 @@ def handle_message(event):
         output_method.handle_send_message4(work,event.reply_token,userId)
     
     #髪の毛test
-    elif event.message.text == ">>test" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>髪色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
@@ -103,7 +103,7 @@ def handle_message(event):
 
 
     #肌の色
-    elif event.message.text == ">>肌変更" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>肌色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         # with open(path_w1) as f:
         #     work = f.read()
@@ -182,7 +182,7 @@ def flex(event):
     #print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     #text_save_id(work)
     #text_save_reply(reply_work)
-    json_open = open('test.json', 'r')
+    json_open = open(skin_change_flex.json, 'r')
     json_data = json.load(json_open)
     user_id = os.environ["USER_ID"]
     
