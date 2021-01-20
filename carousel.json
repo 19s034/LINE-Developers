@@ -8,7 +8,7 @@
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "url": "https://secret-lake-56663.herokuapp.com/static/hair_color_change"
+        "url": "https://secret-lake-56663.herokuapp.com/static/hair_color_change.jpg"
       },
       "footer": {
         "type": "box",
@@ -148,7 +148,7 @@
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "url": "https://secret-lake-56663.herokuapp.com/static/skin_color_change"
+        "url": "https://secret-lake-56663.herokuapp.com/static/skin_color_change.jpg"
       },
       "footer": {
         "type": "box",
